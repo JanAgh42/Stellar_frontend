@@ -13,6 +13,14 @@
     <color name="group_blue">#5F51FF</color>
     <color name="group_violet">#B323CA</color>
 
+    <color name="username_red">#FF0000</color>
+    <color name="username_yellow">#FAFF00</color>
+    <color name="username_green">#00FF47</color>
+    <color name="username_turquoise">#00F0FF</color>
+    <color name="username_blue">#0500FF</color>
+    <color name="username_purple">#B323CA</color>
+    <color name="username_pink">#FF73D8</color>
+
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
 

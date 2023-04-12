@@ -39,6 +39,7 @@
             android:paddingHorizontal="20dp"
             android:paddingVertical="40dp"
             android:background="@drawable/logreg_bkg_design"
+            android:backgroundTint="@color/white"
             android:orientation="vertical">
             <EditText
                 android:layout_width="match_parent"
@@ -67,6 +68,7 @@
                 android:layout_height="wrap_content"
                 app:backgroundTint="@null"
                 android:background="@drawable/logreg_bkg_design"
+                android:backgroundTint="@color/white"
                 android:text="@string/login_sign_in"
                 android:textStyle="bold"
                 android:textColor="@color/background"/>
