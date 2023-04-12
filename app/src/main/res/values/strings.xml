@@ -5,7 +5,11 @@
     <string name="login_email_hint">email address</string>
     <string name="login_password_hint">password</string>
     <string name="login_sign_in">Sign in</string>
-    <string name="login_register">To register</string>
+    <string name="login_to_register">To register</string>
+
+    <string name="register_rep_password">repeat password</string>
+    <string name="register_create_account">Create account</string>
+    <string name="register_to_login">To login</string>
 
     <string name="copyright">Copyright © 2023</string>
 </resources>
