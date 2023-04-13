@@ -17,4 +17,5 @@
     <color name="white">#FFFFFF</color>
 
     <color name="hints_gray">#7A7A7A</color>
+    <color name="text_gray">#B3B3B3</color>
 </resources>
