@@ -28,7 +28,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/logreg_bkg_design"
-                android:backgroundTint=""
+                android:backgroundTint="@color/details_blue"
+                app:backgroundTint="@null"
+                android:text="Edit Photo"
+                android:textColor="@color/component_bkg"
+                android:textStyle="bold"
+                android:textAllCaps="false"
+                />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/logreg_bkg_design"
+                android:backgroundTint="@color/hints_gray"
+                app:backgroundTint="@null"
+                android:text="Log Out"
+                android:textAllCaps="false"/>
         </LinearLayout>
 
         <LinearLayout
@@ -163,5 +177,9 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+    <include layout="@layout/app_menu_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>
