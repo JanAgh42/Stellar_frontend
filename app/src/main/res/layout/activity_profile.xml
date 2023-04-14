@@ -10,51 +10,119 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:clipChildren="false"
+        android:clipToPadding="false">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/component_bkg">
+            android:background="@color/component_bkg"
+            android:orientation="vertical"
+            android:padding="15dp"
+            android:clipChildren="false"
+            android:clipToPadding="false">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:src="@color/white"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="-25dp"
+                    android:layout_marginTop="20dp"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="right">
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/outline_notif_24"
+                        android:layout_marginBottom="30dp"/>
+                    <Button
+                        android:layout_width="120dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/logreg_bkg_design"
+                        android:backgroundTint="@color/details_blue"
+                        app:backgroundTint="@null"
+                        android:text="Edit Photo"
+                        android:textColor="@color/component_bkg"
+                        android:textStyle="bold"
+                        android:textAllCaps="false"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginRight="45dp"/>
+                    <Button
+                        android:layout_width="120dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/logreg_bkg_design"
+                        android:backgroundTint="@color/hints_gray"
+                        app:backgroundTint="@null"
+                        android:textColor="@color/component_bkg"
+                        android:textStyle="bold"
+                        android:text="Log Out"
+                        android:textAllCaps="false"
+                        android:layout_marginRight="45dp"/>
+                </LinearLayout>
+            </LinearLayout>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="PHILOMENKA"
                 android:textColor="@color/username_pink"
                 android:textSize="20sp"
-                android:textStyle="bold"/>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/logreg_bkg_design"
-                android:backgroundTint="@color/details_blue"
-                app:backgroundTint="@null"
-                android:text="Edit Photo"
-                android:textColor="@color/component_bkg"
                 android:textStyle="bold"
-                android:textAllCaps="false"
-                />
-            <Button
-                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:paddingVertical="15dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/logreg_bkg_design"
-                android:backgroundTint="@color/hints_gray"
-                app:backgroundTint="@null"
-                android:text="Log Out"
-                android:textAllCaps="false"/>
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="-45dp">
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:text="42 \n posts"
+                    android:background="@drawable/logreg_bkg_design"
+                    android:backgroundTint="@color/profile_info"
+                    android:gravity="center"
+                    android:layout_marginRight="12dp"/>
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:text="42 \n groups"
+                    android:background="@drawable/logreg_bkg_design"
+                    android:backgroundTint="@color/profile_info"
+                    android:gravity="center"
+                    android:layout_marginLeft="12dp"/>
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="20dp"
-            android:paddingVertical="20dp"
+            android:paddingBottom="30dp"
+            android:paddingTop="5dp"
             android:orientation="vertical"
             android:background="@drawable/logreg_bkg_design"
-            android:backgroundTint="@color/component_bkg"
-            android:layout_marginTop="20dp"
-            android:layout_marginHorizontal="20dp">
+            android:backgroundTint="@color/profile_info"
+            android:layout_marginTop="60dp"
+            android:layout_marginHorizontal="20dp"
+            android:clipToPadding="false">
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_24"
+                android:layout_gravity="right"
+                android:layout_marginRight="-15dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -3,6 +3,7 @@
     <color name="background">#123345</color>
     <color name="component_bkg">#1B3C4E</color>
     <color name="details_blue">#5DA1C7</color>
+    <color name="profile_info">#22485E</color>
 
     <color name="group_pink">#FF6FB4</color>
     <color name="group_green">#4CAE56</color>
