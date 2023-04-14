@@ -45,7 +45,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="5dp"/>
             <include
-                layout="@layout/choose_color_panel"/>
+                layout="@layout/app_choose_color_panel"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="5dp"/>
             <include
-                layout="@layout/choose_color_panel"/>
+                layout="@layout/app_choose_color_panel"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
