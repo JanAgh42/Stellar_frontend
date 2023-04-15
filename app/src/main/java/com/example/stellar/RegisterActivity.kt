@@ -32,6 +32,11 @@ class RegisterActivity(
         this.detachListeners()
     }
 
+    override fun onPause() {
+        super.onPause()
+        overridePendingTransition(0,0)
+    }
+
     override fun loadViews() {
         this.emailField = findViewById(R.id.register_email)
         this.passwordField = findViewById(R.id.register_password)

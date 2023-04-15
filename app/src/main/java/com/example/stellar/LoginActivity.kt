@@ -33,6 +33,11 @@ class LoginActivity(
         this.detachListeners()
     }
 
+    override fun onPause() {
+        super.onPause()
+        overridePendingTransition(0,0)
+    }
+
     override fun loadViews() {
         this.emailField = findViewById(R.id.login_email)
         this.passwordField = findViewById(R.id.login_password)
