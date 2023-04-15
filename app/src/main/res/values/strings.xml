@@ -11,5 +11,7 @@
     <string name="register_create_account">Create account</string>
     <string name="register_to_login">To login</string>
 
+    <string name="cpost_create_button">Post</string>
+
     <string name="copyright">Copyright © 2023</string>
 </resources>

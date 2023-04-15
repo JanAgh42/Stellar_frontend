@@ -26,11 +26,6 @@ class MainActivity(
 
     private lateinit var menuBar: LinearLayout
 
-    private lateinit var menuHome: ImageButton
-    private lateinit var menuProfile: ImageButton
-    private lateinit var menuGroup: ImageButton
-    private lateinit var menuSearch: ImageButton
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -45,6 +40,11 @@ class MainActivity(
         this.detachListeners()
     }
 
+    override fun onPause() {
+        super.onPause()
+        overridePendingTransition(0,0)
+    }
+
     override fun loadViews() {
         this.usernameText = findViewById(R.id.main_username)
         this.groupMemberText = findViewById(R.id.main_group_member)
@@ -54,16 +54,28 @@ class MainActivity(
         this.toNotificationsButton = findViewById(R.id.main_to_notifications)
         this.searchBar = findViewById(R.id.main_search_groups)
         this.menuBar = findViewById(R.id.main_menu_bar)
-        this.menuHome = this.menuBar.findViewById(R.id.menu_home)
-        this.menuProfile = this.menuBar.findViewById(R.id.menu_profile)
-        this.menuGroup = this.menuBar.findViewById(R.id.menu_group)
-        this.menuSearch = this.menuBar.findViewById(R.id.menu_search)
     }
 
     override fun setDefaultValues() {}
 
     override fun attachListeners() {
+        this.menuBarListeners(this.menuBar, this, ActivityTypes.MAIN_ACTIVITY)
 
+        this.toNotificationsButton.setOnClickListener {
+            this.changeActivity(this, NotificationActivity::class.java)
+        }
+
+        this.profilePicture.setOnClickListener {
+            this.changeActivity(this, ProfileActivity::class.java)
+        }
+
+        this.allGroups.setOnClickListener {
+
+        }
+
+        this.ownGroups.setOnClickListener {
+
+        }
     }
 
     override fun detachListeners() {

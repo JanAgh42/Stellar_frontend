@@ -16,11 +16,6 @@ class SearchActivity(
 
     private lateinit var menuBar: LinearLayout
 
-    private lateinit var menuHome: ImageButton
-    private lateinit var menuProfile: ImageButton
-    private lateinit var menuGroup: ImageButton
-    private lateinit var menuSearch: ImageButton
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
@@ -35,19 +30,20 @@ class SearchActivity(
         this.detachListeners()
     }
 
+    override fun onPause() {
+        super.onPause()
+        overridePendingTransition(0,0)
+    }
+
     override fun loadViews() {
         this.searchBar = findViewById(R.id.search_search)
         this.menuBar = findViewById(R.id.search_menu_bar)
-        this.menuHome = this.menuBar.findViewById(R.id.menu_home)
-        this.menuProfile = this.menuBar.findViewById(R.id.menu_profile)
-        this.menuGroup = this.menuBar.findViewById(R.id.menu_group)
-        this.menuSearch = this.menuBar.findViewById(R.id.menu_search)
     }
 
     override fun setDefaultValues() {}
 
     override fun attachListeners() {
-
+        this.menuBarListeners(this.menuBar, this, ActivityTypes.SEARCH_ACTIVITY)
     }
 
     override fun detachListeners() {

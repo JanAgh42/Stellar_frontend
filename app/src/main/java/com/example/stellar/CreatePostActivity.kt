@@ -2,11 +2,14 @@ package com.example.stellar
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 
 class CreatePostActivity(
     general: IGeneralFunctionality = GeneralFunctionality()
@@ -33,16 +36,12 @@ class CreatePostActivity(
 
     private lateinit var menuBar: LinearLayout
 
-    private lateinit var menuHome: ImageButton
-    private lateinit var menuProfile: ImageButton
-    private lateinit var menuGroup: ImageButton
-    private lateinit var menuSearch: ImageButton
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_post)
 
         this.loadViews()
+        this.setDefaultValues()
         this.attachListeners()
     }
 
@@ -50,6 +49,11 @@ class CreatePostActivity(
         super.onDestroy()
 
         this.detachListeners()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        overridePendingTransition(0,0)
     }
 
     override fun loadViews() {
@@ -64,18 +68,28 @@ class CreatePostActivity(
         this.topGoBack = this.topBar.findViewById(R.id.top_back)
         this.topTitle = this.topBar.findViewById(R.id.top_title)
         this.topSettings = this.topBar.findViewById(R.id.top_settings)
-        this.topButton = this.topButton.findViewById(R.id.top_button)
+        this.topButton = this.topBar.findViewById(R.id.top_button)
         this.menuBar = findViewById(R.id.cpost_menu_bar)
-        this.menuHome = this.menuBar.findViewById(R.id.menu_home)
-        this.menuProfile = this.menuBar.findViewById(R.id.menu_profile)
-        this.menuGroup = this.menuBar.findViewById(R.id.menu_group)
-        this.menuSearch = this.menuBar.findViewById(R.id.menu_search)
     }
 
-    override fun setDefaultValues() {}
+    override fun setDefaultValues() {
+        this.topTitle.visibility = View.INVISIBLE
+        this.topSettings.visibility = View.INVISIBLE
+        this.topButton.visibility = View.VISIBLE
+
+        this.topButton.setText(R.string.cpost_create_button)
+    }
 
     override fun attachListeners() {
+        this.menuBarListeners(this.menuBar, this, ActivityTypes.CREATE_POST_ACTIVITY)
 
+        this.topGoBack.setOnClickListener {
+            finish()
+        }
+
+        this.topButton.setOnClickListener {
+
+        }
     }
 
     override fun detachListeners() {
