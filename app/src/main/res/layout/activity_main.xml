@@ -30,12 +30,14 @@
                 android:layout_weight="5"
                 android:orientation="vertical">
                 <TextView
+                    android:id="@+id/main_username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Username"
                     android:textSize="20sp"
                     android:textStyle="bold"/>
                 <TextView
+                    android:id="@+id/main_group_member"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Member of 42 groups"
@@ -48,11 +50,13 @@
                 android:orientation="horizontal"
                 android:gravity="end">
                 <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/main_profile_image"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:src="@color/white"
                     android:layout_marginEnd="10dp" />
                 <ImageButton
+                    android:id="@+id/main_to_notifications"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/outline_notif_24" />
@@ -60,6 +64,7 @@
         </LinearLayout>
 
         <EditText
+            android:id="@+id/main_search_groups"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/search_bar_design"
@@ -86,6 +91,7 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
         <TextView
+            android:id="@+id/main_all_groups"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="All groups"
@@ -94,6 +100,7 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
         <TextView
+            android:id="@+id/main_own_groups"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Own groups"
@@ -105,6 +112,7 @@
 
     <include
         layout="@layout/app_menu_bar"
+        android:id="@+id/main_menu_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true" />

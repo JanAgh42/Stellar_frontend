@@ -40,12 +40,14 @@
             android:backgroundTint="@color/white"
             android:orientation="vertical">
             <EditText
+                android:id="@+id/login_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/login_email_hint"
                 android:textColorHint="@color/hints_gray"
                 android:inputType="textEmailAddress" />
             <EditText
+                android:id="@+id/login_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/login_password_hint"
@@ -61,6 +63,7 @@
             android:orientation="horizontal"
             android:gravity="center_horizontal">
             <Button
+                android:id="@+id/login_sign_in"
                 android:fontFamily="sans-serif"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -72,6 +75,7 @@
                 android:textColor="@color/background"/>
 
             <Button
+                android:id="@+id/login_to_register"
                 android:fontFamily="sans-serif"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

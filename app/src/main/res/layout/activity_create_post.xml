@@ -22,6 +22,7 @@
         android:paddingHorizontal="20dp"
         android:layout_below="@id/cpost_top_bar">
         <TextView
+            android:id="@+id/cpost_message_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New message:"
@@ -38,12 +39,14 @@
             android:padding="10dp"
             android:layout_marginTop="10dp">
             <TextView
+                android:id="@+id/cpost_recipient_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="\@Philomenka"
                 android:textSize="16sp"
                 android:textColor="@color/text_gray"/>
             <TextView
+                android:id="@+id/cpost_recipient_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="I'm coming home ..."
@@ -62,6 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <EditText
+                    android:id="@+id/cpost_message"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:minLines="13"
@@ -84,6 +88,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/location_24" />
             <TextView
+                android:id="@+id/cpost_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/text_gray"
@@ -94,6 +99,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1" />
             <TextView
+                android:id="@+id/cpost_hide_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/text_gray"
@@ -103,6 +109,7 @@
                 android:layout_marginEnd="15dp"/>
         </LinearLayout>
         <CheckBox
+            android:id="@+id/cpost_notify_all"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/text_gray"
@@ -118,6 +125,7 @@
 
     <include
         layout="@layout/app_menu_bar"
+        android:id="@+id/cpost_menu_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true" />

@@ -14,6 +14,7 @@
         android:orientation="vertical"
         android:paddingTop="10dp">
         <EditText
+            android:id="@+id/search_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/search_bar_design"
@@ -74,6 +75,7 @@
     </LinearLayout>
     <include
         layout="@layout/app_menu_bar"
+        android:id="@+id/search_menu_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true" />
