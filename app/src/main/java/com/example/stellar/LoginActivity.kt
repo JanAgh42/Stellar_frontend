@@ -1,20 +1,58 @@
 package com.example.stellar
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import java.io.Serializable
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity(
+    general: IGeneralFunctionality = GeneralFunctionality()
+) : AppCompatActivity(),
+    IMandatoryOverrides,
+    IGeneralFunctionality by general {
 
-    private val emailField = findViewById<EditText>(R.id.login_email)
-    private val passwordField = findViewById<EditText>(R.id.login_password)
+    private lateinit var emailField: EditText
+    private lateinit var passwordField: EditText
 
-    private val loginButton = findViewById<Button>(R.id.login_sign_in)
-    private val toRegisterButton = findViewById<Button>(R.id.login_to_register)
+    private lateinit var loginButton: Button
+    private lateinit var toRegisterButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        this.loadViews()
+        this.attachListeners()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        this.detachListeners()
+    }
+
+    override fun loadViews() {
+        this.emailField = findViewById(R.id.login_email)
+        this.passwordField = findViewById(R.id.login_password)
+        this.loginButton = findViewById(R.id.login_sign_in)
+        this.toRegisterButton = findViewById(R.id.login_to_register)
+    }
+
+    override fun setDefaultValues() {}
+
+    override fun attachListeners() {
+        this.toRegisterButton.setOnClickListener {
+            this.changeActivity(this, RegisterActivity::class.java)
+        }
+
+        this.loginButton.setOnClickListener {
+
+        }
+    }
+
+    override fun detachListeners() {
+
     }
 }
