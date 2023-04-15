@@ -28,6 +28,7 @@
                 android:orientation="horizontal">
 
                 <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_photo"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:src="@color/white"
@@ -41,11 +42,13 @@
                     android:orientation="vertical"
                     android:gravity="right">
                     <ImageButton
+                        android:id="@+id/profile_notif_btn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/outline_notif_24"
                         android:layout_marginBottom="30dp"/>
                     <Button
+                        android:id="@+id/profile_edit_photo"
                         android:layout_width="120dp"
                         android:layout_height="40dp"
                         android:background="@drawable/logreg_bkg_design"
@@ -58,6 +61,7 @@
                         android:layout_marginBottom="15dp"
                         android:layout_marginRight="45dp"/>
                     <Button
+                        android:id="@+id/profile_log_out"
                         android:layout_width="120dp"
                         android:layout_height="40dp"
                         android:background="@drawable/logreg_bkg_design"
@@ -72,6 +76,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/profile_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="PHILOMENKA"
@@ -87,6 +92,7 @@
                 android:gravity="center"
                 android:layout_marginBottom="-45dp">
                 <TextView
+                    android:id="@+id/profile_num_posts"
                     android:layout_width="80dp"
                     android:layout_height="60dp"
                     android:text="42 \n posts"
@@ -95,6 +101,7 @@
                     android:gravity="center"
                     android:layout_marginRight="12dp"/>
                 <TextView
+                    android:id="@+id/profile_num_groups"
                     android:layout_width="80dp"
                     android:layout_height="60dp"
                     android:text="42 \n groups"
@@ -118,6 +125,7 @@
             android:layout_marginHorizontal="20dp"
             android:clipToPadding="false">
             <ImageButton
+                android:id="@+id/profile_edit_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edit_24"
@@ -131,6 +139,7 @@
                 android:textSize="15sp"
                 android:textStyle="bold"/>
             <EditText
+                android:id="@+id/profile_username_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/white"
@@ -146,6 +155,7 @@
                 android:textStyle="bold"
                 android:layout_marginTop="10dp"/>
             <EditText
+                android:id="@+id/profile_email_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/white"
@@ -168,6 +178,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"/>
                 <ImageButton
+                    android:id="@+id/profile_username_white"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="@drawable/select_color_circle"
@@ -177,6 +188,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"/>
                 <ImageButton
+                    android:id="@+id/profile_username_red"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="@drawable/select_color_circle"
@@ -186,6 +198,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"/>
                 <ImageButton
+                    android:id="@+id/profile_username_blue"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="@drawable/select_color_circle"
@@ -195,6 +208,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"/>
                 <ImageButton
+                    android:id="@+id/profile_username_green"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="@drawable/select_color_circle"
@@ -204,6 +218,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"/>
                 <ImageButton
+                    android:id="@+id/profile_username_pink"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="@drawable/select_color_circle"
@@ -213,6 +228,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"/>
                 <ImageButton
+                    android:id="@+id/profile_username_purple"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="@drawable/select_color_circle"
@@ -222,6 +238,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"/>
                 <ImageButton
+                    android:id="@+id/profile_username_yellow"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="@drawable/select_color_circle"
@@ -231,6 +248,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"/>
                 <ImageButton
+                    android:id="@+id/profile_username_turquoise"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="@drawable/select_color_circle"
