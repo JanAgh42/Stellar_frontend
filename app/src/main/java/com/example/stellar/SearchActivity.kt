@@ -6,19 +6,51 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.LinearLayout
 
-class SearchActivity : AppCompatActivity() {
+class SearchActivity(
+    general: IGeneralFunctionality = GeneralFunctionality()
+) : AppCompatActivity(),
+    IMandatoryOverrides,
+    IGeneralFunctionality by general {
 
-    private val searchBar = findViewById<EditText>(R.id.search_search)
+    private lateinit var searchBar: EditText
 
-    private val menuBar = findViewById<LinearLayout>(R.id.search_menu_bar)
+    private lateinit var menuBar: LinearLayout
 
-    private val menuHome = menuBar.findViewById<ImageButton>(R.id.menu_home)
-    private val menuProfile = menuBar.findViewById<ImageButton>(R.id.menu_profile)
-    private val menuGroup = menuBar.findViewById<ImageButton>(R.id.menu_group)
-    private val menuSearch = menuBar.findViewById<ImageButton>(R.id.menu_search)
+    private lateinit var menuHome: ImageButton
+    private lateinit var menuProfile: ImageButton
+    private lateinit var menuGroup: ImageButton
+    private lateinit var menuSearch: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
+
+        this.loadViews()
+        this.attachListeners()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        this.detachListeners()
+    }
+
+    override fun loadViews() {
+        this.searchBar = findViewById(R.id.search_search)
+        this.menuBar = findViewById(R.id.search_menu_bar)
+        this.menuHome = this.menuBar.findViewById(R.id.menu_home)
+        this.menuProfile = this.menuBar.findViewById(R.id.menu_profile)
+        this.menuGroup = this.menuBar.findViewById(R.id.menu_group)
+        this.menuSearch = this.menuBar.findViewById(R.id.menu_search)
+    }
+
+    override fun setDefaultValues() {}
+
+    override fun attachListeners() {
+
+    }
+
+    override fun detachListeners() {
+
     }
 }
