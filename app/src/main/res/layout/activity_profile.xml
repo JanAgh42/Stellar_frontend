@@ -263,7 +263,9 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-    <include layout="@layout/app_menu_bar"
+    <include
+        layout="@layout/app_menu_bar"
+        android:id="@+id/profile_menu_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"/>

@@ -47,7 +47,7 @@ class ScrollCollectionsFunctionality : IScrollCollectionsFunctionality {
             layoutParams.setMargins(0, 0, this.marginToDp(12), 0)
             view.layoutParams = layoutParams
 
-            view.tag = it.name
+            view.tag = it.iconName
             view.background = ContextCompat.getDrawable(context, it.resource)
             view.backgroundTintList = ColorStateList
                 .valueOf(ContextCompat.getColor(context, R.color.white))

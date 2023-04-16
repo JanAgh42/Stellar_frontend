@@ -18,6 +18,7 @@
         android:layout_below="@id/group_top_bar"
         android:scrollbars="none">
         <LinearLayout
+            android:id="@+id/group_message_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="10dp"
@@ -30,6 +31,7 @@
     </ScrollView>
     <include
         layout="@layout/app_menu_bar"
+        android:id="@+id/group_menu_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"/>

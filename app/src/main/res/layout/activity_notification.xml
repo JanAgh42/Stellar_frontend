@@ -18,6 +18,7 @@
         android:layout_below="@id/notif_top_bar"
         android:scrollbars="none">
         <LinearLayout
+            android:id="@+id/notif_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -42,6 +43,7 @@
     </ScrollView>
     <include
         layout="@layout/app_menu_bar"
+        android:id="@+id/notif_menu_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"/>

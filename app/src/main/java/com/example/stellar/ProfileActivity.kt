@@ -1,5 +1,6 @@
 package com.example.stellar
 
+import android.icu.util.MeasureUnit
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -9,10 +10,14 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import de.hdodenhof.circleimageview.CircleImageView
 
-class ProfileActivity : AppCompatActivity() {
+class ProfileActivity(
+    general: IGeneralFunctionality = GeneralFunctionality()
+) : AppCompatActivity(),
+    IMandatoryOverrides,
+    IGeneralFunctionality by general {
 
     private lateinit var profilePhoto: CircleImageView
-    private lateinit var profileNotifBtn: ImageButton
+    private lateinit var profileToNotificationsBtn: ImageButton
     private lateinit var profileEditPhoto: Button
     private lateinit var profileLogOut: Button
     private lateinit var profileUsername: TextView
@@ -31,12 +36,35 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var profileUsernameYellow: ImageButton
     private lateinit var profileUsernameTurquoise: ImageButton
 
+    private lateinit var menuBar: LinearLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
+        this.loadViews()
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        this.attachListeners()
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        this.detachListeners()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        overridePendingTransition(0, 0)
+    }
+
+    override fun loadViews() {
         this.profilePhoto = findViewById(R.id.profile_photo)
-        this.profileNotifBtn = findViewById(R.id.profile_notif_btn)
+        this.profileToNotificationsBtn = findViewById(R.id.profile_notif_btn)
         this.profileEditPhoto = findViewById(R.id.profile_edit_photo)
         this.profileLogOut = findViewById(R.id.profile_log_out)
         this.profileUsername = findViewById(R.id.profile_username)
@@ -53,6 +81,22 @@ class ProfileActivity : AppCompatActivity() {
         this.profileUsernamePurple = findViewById(R.id.profile_username_purple)
         this.profileUsernameYellow = findViewById(R.id.profile_username_yellow)
         this.profileUsernameTurquoise = findViewById(R.id.profile_username_turquoise)
+        this.menuBar = findViewById(R.id.profile_menu_bar)
+    }
 
+    override fun setDefaultValues() {
+
+    }
+
+    override fun attachListeners() {
+        this.profileToNotificationsBtn.setOnClickListener {
+            this.changeActivity(this, NotificationActivity::class.java)
+        }
+
+        this.menuBarListeners(this.menuBar, this, ActivityTypes.PROFILE_ACTIVITY)
+    }
+
+    override fun detachListeners() {
+        this.profileToNotificationsBtn.setOnClickListener(null)
     }
 }
