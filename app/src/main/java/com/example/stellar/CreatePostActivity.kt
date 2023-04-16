@@ -1,15 +1,28 @@
 package com.example.stellar
 
+import android.Manifest
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Geocoder
+import android.location.Location
+import android.location.LocationManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
 import android.view.View
-import android.widget.CheckBox
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import java.security.Permission
 
 class CreatePostActivity(
     general: IGeneralFunctionality = GeneralFunctionality()
@@ -22,6 +35,9 @@ class CreatePostActivity(
     private lateinit var recipientMessage: TextView
     private lateinit var showLocation: TextView
     private lateinit var hideLocation: TextView
+
+    private lateinit var openCamera: Button
+    private lateinit var openGallery: Button
 
     private lateinit var messageContent: EditText
 
@@ -36,17 +52,30 @@ class CreatePostActivity(
 
     private lateinit var menuBar: LinearLayout
 
+    private lateinit var lManager: LocationManager
+
+    private lateinit var pictureAction: ActivityResultLauncher<Intent>
+
+    private val LOCATION_REQUEST_CODE = 10101
+    private val CAMERA_REQUEST_CODE = 10100
+    private val GALLERY_REQUEST_CODE = 10111
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_post)
 
         this.loadViews()
         this.setDefaultValues()
+    }
+
+    override fun onStart() {
+        super.onStart()
+
         this.attachListeners()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onStop() {
+        super.onStop()
 
         this.detachListeners()
     }
@@ -70,6 +99,8 @@ class CreatePostActivity(
         this.topSettings = this.topBar.findViewById(R.id.top_settings)
         this.topButton = this.topBar.findViewById(R.id.top_button)
         this.menuBar = findViewById(R.id.cpost_menu_bar)
+        this.openCamera = findViewById(R.id.cpost_camera)
+        this.openGallery = findViewById(R.id.cpost_gallery)
     }
 
     override fun setDefaultValues() {
@@ -78,6 +109,8 @@ class CreatePostActivity(
         this.topButton.visibility = View.VISIBLE
 
         this.topButton.setText(R.string.cpost_create_button)
+
+        this.lManager = this.getSystemService(LOCATION_SERVICE) as LocationManager
     }
 
     override fun attachListeners() {
@@ -88,11 +121,113 @@ class CreatePostActivity(
         }
 
         this.topButton.setOnClickListener {
+            finish()
+        }
 
+        this.showLocation.setOnClickListener {
+            this.checkForPermissions(
+                android.Manifest.permission.ACCESS_COARSE_LOCATION,
+                LOCATION_REQUEST_CODE,
+                applicationContext,
+                this,
+                this::getUserLocation)
+        }
+
+        this.hideLocation.setOnClickListener {
+            this.showLocation.setText(R.string.cpost_clear_location)
+        }
+
+        this.openGallery.setOnClickListener {
+            this.checkForPermissions(
+                android.Manifest.permission.READ_EXTERNAL_STORAGE,
+                GALLERY_REQUEST_CODE,
+                applicationContext,
+                this,
+                this::getImageFromGallery)
+        }
+
+        this.openCamera.setOnClickListener {
+            this.checkForPermissions(
+                android.Manifest.permission.CAMERA,
+                CAMERA_REQUEST_CODE,
+                applicationContext,
+                this,
+                this::getImageFromCamera)
+        }
+
+        this.pictureAction = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == Activity.RESULT_OK && it.data != null) {
+                this.handleReceivedImage(it)
+            }
         }
     }
 
     override fun detachListeners() {
+        this.topGoBack.setOnClickListener(null)
+        this.topButton.setOnClickListener(null)
+        this.showLocation.setOnClickListener(null)
+        this.hideLocation.setOnClickListener(null)
+        this.openCamera.setOnClickListener(null)
+        this.openGallery.setOnClickListener(null)
+    }
+
+    override fun onRequestPermissionsResult (
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+            return
+        }
+
+        when (requestCode) {
+            this.LOCATION_REQUEST_CODE -> {
+                this.getUserLocation()
+            }
+            this.CAMERA_REQUEST_CODE -> {
+                this.getImageFromCamera()
+            }
+            this.GALLERY_REQUEST_CODE -> {
+                this.getImageFromGallery()
+            }
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    @Suppress("DEPRECATION")
+    private fun getUserLocation() {
+        val location = this.lManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+
+        val coordinates = location?.let {
+            Geocoder(this).getFromLocation(
+                it.latitude,
+                it.longitude,
+                1)
+        }
+
+        if (coordinates == null) {
+            this.showLocation.setText(R.string.cpost_no_location)
+            Toast.makeText(this, getString(R.string.cpost_location_toast), Toast.LENGTH_LONG).show()
+        }
+        else {
+            val locationString = "${coordinates[0].locality}, ${coordinates[0].countryCode}"
+            this.showLocation.text = locationString
+        }
+    }
+
+    private fun getImageFromGallery() {
+        val toGallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+        this.pictureAction.launch(toGallery)
+    }
+
+    private fun getImageFromCamera() {
+        val toCamera = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        this.pictureAction.launch(toCamera)
+    }
+
+    private fun handleReceivedImage(result: ActivityResult) {
 
     }
 }

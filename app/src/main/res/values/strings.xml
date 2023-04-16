@@ -12,6 +12,9 @@
     <string name="register_to_login">To login</string>
 
     <string name="cpost_create_button">Post</string>
+    <string name="cpost_clear_location">Show my location</string>
+    <string name="cpost_no_location">Could not locate</string>
+    <string name="cpost_location_toast">Turn on your GPS to get current location</string>
 
     <string name="copyright">Copyright © 2023</string>
 </resources>

@@ -92,7 +92,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/text_gray"
-                android:text="Show my location"
+                android:text="@string/cpost_clear_location"
                 android:layout_marginStart="5dp"/>
             <View
                 android:layout_width="0dp"
@@ -118,9 +118,41 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Attached photos"
+            android:text="Attached photo"
             android:layout_marginTop="10dp"
             android:textSize="16sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/cpost_camera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/details_blue"
+                android:text="Camera"
+                android:textColor="@color/component_bkg"
+                android:textStyle="bold"
+                android:paddingVertical="5dp"
+                android:paddingHorizontal="10dp"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+                android:textAllCaps="false"
+                android:layout_marginEnd="10dp"/>
+            <Button
+                android:id="@+id/cpost_gallery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/details_blue"
+                android:text="Gallery"
+                android:textColor="@color/component_bkg"
+                android:textStyle="bold"
+                android:paddingVertical="5dp"
+                android:paddingHorizontal="10dp"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+                android:textAllCaps="false"/>
+        </LinearLayout>
     </LinearLayout>
 
     <include

@@ -8,9 +8,13 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 
-class CreateGroupActivity : AppCompatActivity() {
+class CreateGroupActivity(
+    scrollCollections: IScrollCollectionsFunctionality = ScrollCollectionsFunctionality()
+) : AppCompatActivity(),
+    IScrollCollectionsFunctionality by scrollCollections{
 
     private lateinit var groupExample: LinearLayout
+    private lateinit var iconsLayout: LinearLayout
 
     private lateinit var exampleBackground: LinearLayout
     private lateinit var exampleIconBackground: LinearLayout
@@ -72,6 +76,6 @@ class CreateGroupActivity : AppCompatActivity() {
         this.groupIconBkgPink = groupIconBkg.findViewById(R.id.group_pink)
         this.groupIconBkgPurple = groupIconBkg.findViewById(R.id.group_purple)
         this.groupIconBkgTurquoise = groupIconBkg.findViewById(R.id.group_turquoise)
-
+        this.iconsLayout = findViewById(R.id.cgroup_icons_layout)
     }
 }

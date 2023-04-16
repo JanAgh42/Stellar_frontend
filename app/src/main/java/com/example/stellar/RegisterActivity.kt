@@ -23,11 +23,16 @@ class RegisterActivity(
         setContentView(R.layout.activity_register)
 
         this.loadViews()
+    }
+
+    override fun onStart() {
+        super.onStart()
+
         this.attachListeners()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onStop() {
+        super.onStop()
 
         this.detachListeners()
     }
@@ -58,6 +63,7 @@ class RegisterActivity(
     }
 
     override fun detachListeners() {
-
+        this.toLoginButton.setOnClickListener(null)
+        this.registerButton.setOnClickListener(null)
     }
 }
