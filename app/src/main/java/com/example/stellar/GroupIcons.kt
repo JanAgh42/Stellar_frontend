@@ -2,7 +2,7 @@ package com.example.stellar
 
 import androidx.annotation.DrawableRes
 
-enum class GroupIcons (@DrawableRes val resource: Int, name: String) {
+enum class GroupIcons (@DrawableRes val resource: Int, val iconName: String) {
     BIOTECH(R.drawable.biotech, "biotech"),
     FOREST(R.drawable.forest, "forest"),
     LAPTOP(R.drawable.laptop_chromebook, "laptop_chromebook"),
