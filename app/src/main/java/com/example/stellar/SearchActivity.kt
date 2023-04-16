@@ -3,6 +3,7 @@ package com.example.stellar
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.Toast
 
@@ -15,6 +16,8 @@ class SearchActivity(
     IScrollCollectionsFunctionality by scrollCollections {
 
     private lateinit var searchBar: EditText
+
+    private lateinit var deleteText: ImageButton
 
     private lateinit var menuBar: LinearLayout
     private lateinit var tagsLayout: LinearLayout
@@ -47,6 +50,7 @@ class SearchActivity(
         this.searchBar = findViewById(R.id.search_search)
         this.menuBar = findViewById(R.id.search_menu_bar)
         this.tagsLayout = findViewById(R.id.search_tags_layout)
+        this.deleteText = findViewById(R.id.search_delete_text)
 
         this.generateDynamicTags(this.tagsLayout, this, this::getTagData)
     }
@@ -55,6 +59,10 @@ class SearchActivity(
 
     override fun attachListeners() {
         this.menuBarListeners(this.menuBar, this, ActivityTypes.SEARCH_ACTIVITY)
+
+        this.deleteText.setOnClickListener {
+            this.searchBar.text = null
+        }
     }
 
     override fun detachListeners() {

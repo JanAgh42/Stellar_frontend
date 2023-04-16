@@ -1,28 +1,20 @@
 package com.example.stellar
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Geocoder
-import android.location.Location
-import android.location.LocationManager
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
-import java.security.Permission
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 
 class CreatePostActivity(
     general: IGeneralFunctionality = GeneralFunctionality()
@@ -35,6 +27,8 @@ class CreatePostActivity(
     private lateinit var recipientMessage: TextView
     private lateinit var showLocation: TextView
     private lateinit var hideLocation: TextView
+    private lateinit var removePhoto: TextView
+    private lateinit var photoName: TextView
 
     private lateinit var openCamera: Button
     private lateinit var openGallery: Button
@@ -49,10 +43,11 @@ class CreatePostActivity(
     private lateinit var topTitle: TextView
     private lateinit var topSettings: ImageButton
     private lateinit var topButton: TextView
+    private lateinit var topMessage: ImageButton
 
     private lateinit var menuBar: LinearLayout
 
-    private lateinit var lManager: LocationManager
+    private lateinit var lManager: FusedLocationProviderClient
 
     private lateinit var pictureAction: ActivityResultLauncher<Intent>
 
@@ -98,19 +93,27 @@ class CreatePostActivity(
         this.topTitle = this.topBar.findViewById(R.id.top_title)
         this.topSettings = this.topBar.findViewById(R.id.top_settings)
         this.topButton = this.topBar.findViewById(R.id.top_button)
+        this.topMessage = this.topBar.findViewById(R.id.top_add_message)
         this.menuBar = findViewById(R.id.cpost_menu_bar)
         this.openCamera = findViewById(R.id.cpost_camera)
         this.openGallery = findViewById(R.id.cpost_gallery)
+        this.removePhoto = findViewById(R.id.cpost_remove_photo)
+        this.photoName = findViewById(R.id.cpost_photo_name)
     }
 
     override fun setDefaultValues() {
         this.topTitle.visibility = View.INVISIBLE
         this.topSettings.visibility = View.INVISIBLE
         this.topButton.visibility = View.VISIBLE
+        this.topMessage.visibility = View.INVISIBLE
+        this.hideLocation.visibility = View.INVISIBLE
+
+        this.removePhoto.visibility = View.INVISIBLE
+        this.photoName.visibility = View.INVISIBLE
 
         this.topButton.setText(R.string.cpost_create_button)
 
-        this.lManager = this.getSystemService(LOCATION_SERVICE) as LocationManager
+        this.lManager = LocationServices.getFusedLocationProviderClient(this)
     }
 
     override fun attachListeners() {
@@ -126,7 +129,7 @@ class CreatePostActivity(
 
         this.showLocation.setOnClickListener {
             this.checkForPermissions(
-                android.Manifest.permission.ACCESS_COARSE_LOCATION,
+                android.Manifest.permission.ACCESS_FINE_LOCATION,
                 LOCATION_REQUEST_CODE,
                 applicationContext,
                 this,
@@ -135,6 +138,13 @@ class CreatePostActivity(
 
         this.hideLocation.setOnClickListener {
             this.showLocation.setText(R.string.cpost_clear_location)
+            this.hideLocation.visibility = View.INVISIBLE
+        }
+
+        this.removePhoto.setOnClickListener {
+            this.photoName.setText(R.string.cpost_photo_name)
+            this.photoName.visibility = View.INVISIBLE
+            this.removePhoto.visibility = View.INVISIBLE
         }
 
         this.openGallery.setOnClickListener {
@@ -198,22 +208,17 @@ class CreatePostActivity(
     @SuppressLint("MissingPermission")
     @Suppress("DEPRECATION")
     private fun getUserLocation() {
-        val location = this.lManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+        this.lManager.lastLocation.addOnSuccessListener {
+            try {
+                val coords = Geocoder(this)
+                    .getFromLocation(it.latitude, it.longitude, 1)!!
 
-        val coordinates = location?.let {
-            Geocoder(this).getFromLocation(
-                it.latitude,
-                it.longitude,
-                1)
-        }
-
-        if (coordinates == null) {
-            this.showLocation.setText(R.string.cpost_no_location)
-            Toast.makeText(this, getString(R.string.cpost_location_toast), Toast.LENGTH_LONG).show()
-        }
-        else {
-            val locationString = "${coordinates[0].locality}, ${coordinates[0].countryCode}"
-            this.showLocation.text = locationString
+                this.showLocation.text = "${coords[0].locality}, ${coords[0].countryCode}"
+                this.hideLocation.visibility = View.VISIBLE
+            } catch (e: Exception) {
+                this.showLocation.setText(R.string.cpost_no_location)
+                Toast.makeText(this, getString(R.string.cpost_location_toast), Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -228,6 +233,10 @@ class CreatePostActivity(
     }
 
     private fun handleReceivedImage(result: ActivityResult) {
+        this.photoName.visibility = View.VISIBLE
+        this.removePhoto.visibility = View.VISIBLE
 
+        val imageURI = result.data?.data
+        this.photoName.text = imageURI.toString()
     }
 }

@@ -25,7 +25,7 @@
             android:id="@+id/cpost_message_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New message:"
+            android:text="@string/cpost_new_message"
             android:textStyle="bold"
             android:textSize="20sp"
             android:layout_marginTop="20dp"/>
@@ -42,14 +42,14 @@
                 android:id="@+id/cpost_recipient_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="\@Philomenka"
+                android:text="@string/cpost_philomenka"
                 android:textSize="16sp"
                 android:textColor="@color/text_gray"/>
             <TextView
                 android:id="@+id/cpost_recipient_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="I'm coming home ..."
+                android:text="@string/cpost_philomenka_threat"
                 android:textSize="16sp"
                 android:textColor="@color/text_gray"/>
         </LinearLayout>
@@ -68,12 +68,13 @@
                     android:id="@+id/cpost_message"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minLines="13"
-                    android:maxLines="13"
+                    android:minLines="12"
+                    android:maxLines="12"
                     android:gravity="start"
                     android:scrollbars="vertical"
                     android:textColor="@color/text_gray"
-                    android:text="Example"
+                    android:textColorHint="@color/text_gray"
+                    android:hint="@string/cpost_message_hint"
                     android:background="@color/component_bkg"/>
             </ScrollView>
         </LinearLayout>
@@ -103,7 +104,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/text_gray"
-                android:text="Hide"
+                android:text="@string/cpost_hide_location"
                 android:textSize="16sp"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="15dp"/>
@@ -113,12 +114,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/text_gray"
-            android:text="Notify all members"
+            android:text="@string/cpost_group_notif"
             android:textSize="16sp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Attached photo"
+            android:text="@string/cpost_photos"
             android:layout_marginTop="10dp"
             android:textSize="16sp" />
         <LinearLayout
@@ -130,7 +131,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/details_blue"
-                android:text="Camera"
+                android:text="@string/cpost_camera"
                 android:textColor="@color/component_bkg"
                 android:textStyle="bold"
                 android:paddingVertical="5dp"
@@ -144,7 +145,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/details_blue"
-                android:text="Gallery"
+                android:text="@string/cpost_gallery"
                 android:textColor="@color/component_bkg"
                 android:textStyle="bold"
                 android:paddingVertical="5dp"
@@ -152,7 +153,27 @@
                 android:minHeight="0dp"
                 android:minWidth="0dp"
                 android:textAllCaps="false"/>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+            <TextView
+                android:id="@+id/cpost_remove_photo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_gray"
+                android:text="@string/cpost_remove_photo"
+                android:textSize="16sp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="15dp"/>
         </LinearLayout>
+        <TextView
+            android:id="@+id/cpost_photo_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cpost_photo_name"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/text_gray" />
     </LinearLayout>
 
     <include
