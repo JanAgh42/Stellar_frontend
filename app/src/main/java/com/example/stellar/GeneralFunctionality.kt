@@ -1,9 +1,14 @@
 package com.example.stellar
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.view.View
 import android.widget.ImageButton
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
 class GeneralFunctionality : IGeneralFunctionality {
@@ -13,7 +18,7 @@ class GeneralFunctionality : IGeneralFunctionality {
         new: Class<*>,
         data: Map<String, java.io.Serializable>?)
     {
-        val intent: Intent = Intent(current, new)
+        val intent = Intent(current, new)
 
         data?.forEach { (key, value) ->
             intent.putExtra(key, value)
@@ -53,20 +58,43 @@ class GeneralFunctionality : IGeneralFunctionality {
             else -> {}
         }
 
-        menuHome.setOnClickListener {
-            this.changeActivity(context, MainActivity::class.java)
+        if (!menuHome.hasOnClickListeners()) {
+            menuHome.setOnClickListener {
+                this.changeActivity(context, MainActivity::class.java)
+            }
         }
 
-        menuProfile.setOnClickListener {
-            this.changeActivity(context, ProfileActivity::class.java)
+        if (!menuProfile.hasOnClickListeners()) {
+            menuProfile.setOnClickListener {
+                this.changeActivity(context, ProfileActivity::class.java)
+            }
         }
 
-        menuGroup.setOnClickListener {
-            this.changeActivity(context, CreateGroupActivity::class.java)
+        if (!menuGroup.hasOnClickListeners()) {
+            menuGroup.setOnClickListener {
+                this.changeActivity(context, CreateGroupActivity::class.java)
+            }
         }
 
-        menuSearch.setOnClickListener {
-            this.changeActivity(context, SearchActivity::class.java)
+        if (!menuSearch.hasOnClickListeners()) {
+            menuSearch.setOnClickListener {
+                this.changeActivity(context, SearchActivity::class.java)
+            }
+        }
+    }
+
+    override fun checkForPermissions(
+        type: String,
+        code: Int,
+        appContext: Context,
+        activity: Activity,
+        callback: () -> Unit
+    ) {
+        if (ContextCompat.checkSelfPermission(appContext, type) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(activity, arrayOf(type), code)
+        }
+        else {
+            callback()
         }
     }
 }

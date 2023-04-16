@@ -31,11 +31,16 @@ class MainActivity(
         setContentView(R.layout.activity_main)
 
         this.loadViews()
+    }
+
+    override fun onStart() {
+        super.onStart()
+
         this.attachListeners()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onStop() {
+        super.onStop()
 
         this.detachListeners()
     }
@@ -79,6 +84,9 @@ class MainActivity(
     }
 
     override fun detachListeners() {
-
+        this.toNotificationsButton.setOnClickListener(null)
+        this.profilePicture.setOnClickListener(null)
+        this.allGroups.setOnEditorActionListener(null)
+        this.ownGroups.setOnEditorActionListener(null)
     }
 }

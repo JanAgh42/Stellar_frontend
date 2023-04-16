@@ -1,5 +1,6 @@
 package com.example.stellar
 
+import android.app.Activity
 import android.content.Context
 import android.view.View
 
@@ -12,4 +13,10 @@ interface IGeneralFunctionality {
         menuBar: View,
         context: Context,
         activity: ActivityTypes)
+    fun checkForPermissions(
+        type: String,
+        code: Int,
+        appContext: Context,
+        activity: Activity,
+        callback: () -> Unit)
 }

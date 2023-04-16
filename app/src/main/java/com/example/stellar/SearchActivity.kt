@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.Toast
 
 class SearchActivity(
     general: IGeneralFunctionality = GeneralFunctionality(),
@@ -23,11 +24,16 @@ class SearchActivity(
         setContentView(R.layout.activity_search)
 
         this.loadViews()
+    }
+
+    override fun onStart() {
+        super.onStart()
+
         this.attachListeners()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onStop() {
+        super.onStop()
 
         this.detachListeners()
     }
@@ -42,7 +48,7 @@ class SearchActivity(
         this.menuBar = findViewById(R.id.search_menu_bar)
         this.tagsLayout = findViewById(R.id.search_tags_layout)
 
-        this.generateDynamicTags(this.tagsLayout, this)
+        this.generateDynamicTags(this.tagsLayout, this, this::getTagData)
     }
 
     override fun setDefaultValues() {}
@@ -53,5 +59,9 @@ class SearchActivity(
 
     override fun detachListeners() {
 
+    }
+
+    private fun getTagData(text: String) {
+        Toast.makeText(this, text, Toast.LENGTH_LONG).show()
     }
 }

@@ -24,11 +24,16 @@ class LoginActivity(
         setContentView(R.layout.activity_login)
 
         this.loadViews()
+    }
+
+    override fun onStart() {
+        super.onStart()
+
         this.attachListeners()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onStop() {
+        super.onStop()
 
         this.detachListeners()
     }
@@ -58,6 +63,7 @@ class LoginActivity(
     }
 
     override fun detachListeners() {
-
+        this.toRegisterButton.setOnClickListener(null)
+        this.loginButton.setOnClickListener(null)
     }
 }
