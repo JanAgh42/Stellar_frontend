@@ -17,13 +17,15 @@
         android:orientation="vertical"
         android:background="@color/component_bkg"
         android:clipChildren="false"
-        android:clipToPadding="false">
+        android:clipToPadding="false"
+        android:elevation="18dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="15dp"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:layout_marginBottom="35dp">
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -33,14 +35,14 @@
                     android:id="@+id/main_username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Username"
+                    android:text="@string/main_name"
                     android:textSize="20sp"
                     android:textStyle="bold"/>
                 <TextView
                     android:id="@+id/main_group_member"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Member of 42 groups"
+                    android:text="@string/main_member"
                     android:textColor="@color/text_gray"/>
             </LinearLayout>
             <LinearLayout
@@ -62,31 +64,38 @@
                     android:background="@drawable/outline_notif_24" />
             </LinearLayout>
         </LinearLayout>
-
-        <EditText
-            android:id="@+id/main_search_groups"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/search_bar_design"
-            android:backgroundTint="@color/white"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="-19dp"
-            android:paddingVertical="6dp"
-            android:paddingHorizontal="10dp"
-            android:hint="Enter group name..."
-            android:singleLine="true"
-            android:maxLines="1"
-            android:inputType="text" />
     </LinearLayout>
+
+    <EditText
+        android:id="@+id/main_search_groups"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/search_bar_design"
+        android:backgroundTint="@color/white"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="-18dp"
+        android:paddingVertical="6dp"
+        android:paddingHorizontal="10dp"
+        android:layout_below="@id/main_profile_links"
+        android:textColorHint="@color/hints_gray"
+        android:textColor="@color/hints_gray"
+        android:hint="@string/search_hint"
+        android:singleLine="true"
+        android:maxLines="1"
+        android:inputType="text"
+        android:translationZ="20dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/main_profile_links"
-        android:layout_marginTop="40dp"
-        android:orientation="horizontal">
+        android:layout_below="@id/main_search_groups"
+        android:paddingTop="40dp"
+        android:paddingBottom="5dp"
+        android:layout_marginTop="-21dp"
+        android:orientation="horizontal"
+        android:background="@color/background"
+        android:elevation="15dp">
         <View android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1" />
@@ -94,7 +103,7 @@
             android:id="@+id/main_all_groups"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="All groups"
+            android:text="@string/main_all_groups"
             android:textStyle="bold" />
         <View android:layout_width="wrap_content"
             android:layout_height="0dp"
@@ -103,7 +112,7 @@
             android:id="@+id/main_own_groups"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Own groups"
+            android:text="@string/main_own_groups"
             android:textStyle="bold"/>
         <View android:layout_width="wrap_content"
             android:layout_height="0dp"

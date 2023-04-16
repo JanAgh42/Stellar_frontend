@@ -1,11 +1,9 @@
 package com.example.stellar
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import java.io.Serializable
 
 class LoginActivity(
     general: IGeneralFunctionality = GeneralFunctionality()

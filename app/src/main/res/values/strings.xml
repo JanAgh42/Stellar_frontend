@@ -2,6 +2,14 @@
     <string name="app_name">Stellar</string>
     <string name="app_desc">Learn together</string>
 
+    <string name="main_name">Username</string>
+    <string name="main_member">Member of 42 groups</string>
+    <string name="main_all_groups">All groups</string>
+    <string name="main_own_groups">Own groups</string>
+
+    <string name="search_hint">Enter group name…</string>
+    <string name="search_tags_header">Suggested tags</string>
+
     <string name="login_email_hint">email address</string>
     <string name="login_password_hint">password</string>
     <string name="login_sign_in">Sign in</string>
@@ -12,9 +20,20 @@
     <string name="register_to_login">To login</string>
 
     <string name="cpost_create_button">Post</string>
+    <string name="cpost_new_message">New message:</string>
+    <string name="cpost_philomenka">\@Philomenka</string>
+    <string name="cpost_philomenka_threat">I am coming home…</string>
+    <string name="cpost_message_hint">Enter message…</string>
+    <string name="cpost_group_notif">Notify all members</string>
+    <string name="cpost_hide_location">Hide</string>
     <string name="cpost_clear_location">Show my location</string>
     <string name="cpost_no_location">Could not locate</string>
     <string name="cpost_location_toast">Turn on your GPS to get current location</string>
+    <string name="cpost_photos">Attached photo</string>
+    <string name="cpost_remove_photo">Remove</string>
+    <string name="cpost_photo_name">Photo name</string>
+    <string name="cpost_camera">Camera</string>
+    <string name="cpost_gallery">Gallery</string>
 
     <string name="cgroup_create_button">Save</string>
 

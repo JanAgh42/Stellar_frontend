@@ -83,7 +83,7 @@
                 android:fontFamily="sans-serif"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:background="@drawable/logreg_button_design"
                 android:text="@string/register_to_login"
                 android:textStyle="bold"
