@@ -43,7 +43,8 @@
                 android:layout_height="wrap_content"
                 android:minWidth="70dp"
                 android:minHeight="70dp"
-                android:src="@drawable/radio"/>
+                android:background="@drawable/radio"
+                android:backgroundTint="@color/black"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

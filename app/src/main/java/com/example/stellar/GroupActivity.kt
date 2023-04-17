@@ -6,6 +6,10 @@ import android.view.View
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.example.stellar.enums.ActivityTypes
+import com.example.stellar.functionalities.GeneralFunctionality
+import com.example.stellar.interfaces.IGeneralFunctionality
+import com.example.stellar.interfaces.IMandatoryOverrides
 
 class GroupActivity(
     general: IGeneralFunctionality = GeneralFunctionality()
@@ -69,7 +73,7 @@ class GroupActivity(
     }
 
     override fun attachListeners() {
-        this.menuBarListeners(this.menuBar, this, ActivityTypes.NOTIFICATION_ACTIVITY)
+        this.menuBarListeners(this.menuBar, this, ActivityTypes.GROUP_ACTIVITY)
 
         this.topGoBack.setOnClickListener {
             finish()

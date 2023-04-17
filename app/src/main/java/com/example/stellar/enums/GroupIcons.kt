@@ -1,6 +1,7 @@
-package com.example.stellar
+package com.example.stellar.enums
 
 import androidx.annotation.DrawableRes
+import com.example.stellar.R
 
 enum class GroupIcons (@DrawableRes val resource: Int, val iconName: String) {
     BIOTECH(R.drawable.biotech, "biotech"),

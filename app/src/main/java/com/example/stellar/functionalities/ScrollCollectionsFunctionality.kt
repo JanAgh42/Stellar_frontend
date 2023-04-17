@@ -1,4 +1,4 @@
-package com.example.stellar
+package com.example.stellar.functionalities
 
 import android.content.Context
 import android.content.res.ColorStateList
@@ -13,6 +13,10 @@ import android.widget.LinearLayout.LayoutParams
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.view.children
+import com.example.stellar.enums.GroupIcons
+import com.example.stellar.enums.GroupTags
+import com.example.stellar.R
+import com.example.stellar.interfaces.IScrollCollectionsFunctionality
 
 class ScrollCollectionsFunctionality : IScrollCollectionsFunctionality {
 

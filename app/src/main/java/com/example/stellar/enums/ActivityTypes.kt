@@ -1,4 +1,4 @@
-package com.example.stellar
+package com.example.stellar.enums
 
 enum class ActivityTypes {
     MAIN_ACTIVITY,

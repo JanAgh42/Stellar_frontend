@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import com.example.stellar.functionalities.GeneralFunctionality
+import com.example.stellar.interfaces.IGeneralFunctionality
+import com.example.stellar.interfaces.IMandatoryOverrides
 
 class RegisterActivity(
     general: IGeneralFunctionality = GeneralFunctionality()
