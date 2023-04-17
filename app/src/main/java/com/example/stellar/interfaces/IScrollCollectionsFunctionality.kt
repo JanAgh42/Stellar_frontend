@@ -1,4 +1,4 @@
-package com.example.stellar
+package com.example.stellar.interfaces
 
 import android.content.Context
 import android.view.View

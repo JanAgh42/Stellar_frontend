@@ -4,6 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import androidx.core.content.ContextCompat
+import com.example.stellar.enums.ActivityTypes
+import com.example.stellar.functionalities.GeneralFunctionality
+import com.example.stellar.functionalities.ScrollCollectionsFunctionality
+import com.example.stellar.interfaces.IGeneralFunctionality
+import com.example.stellar.interfaces.IMandatoryOverrides
+import com.example.stellar.interfaces.IScrollCollectionsFunctionality
 
 class CreateGroupActivity(
     general: IGeneralFunctionality = GeneralFunctionality(),
@@ -117,7 +124,7 @@ class CreateGroupActivity(
         this.topButton = this.topBar.findViewById(R.id.top_button)
         this.topMessage = this.topBar.findViewById(R.id.top_add_message)
 
-        this.generateDynamicIcons(this.iconsLayout, this, this::getTagData)
+        this.generateDynamicIcons(this.iconsLayout, this, this::getIconData)
         this.generateDynamicTags(this.tagsLayout, this, this::getTagData)
     }
 
@@ -147,7 +154,12 @@ class CreateGroupActivity(
         this.topButton.setOnClickListener(null)
     }
 
+    private fun getIconData(text: String) {
+        val icon = this.resources.getIdentifier(text, "drawable", this.packageName)
+        this.exampleIcon.background = ContextCompat.getDrawable(this, icon)
+    }
+
     private fun getTagData(text: String) {
-        Toast.makeText(this, text, Toast.LENGTH_LONG).show()
+
     }
 }

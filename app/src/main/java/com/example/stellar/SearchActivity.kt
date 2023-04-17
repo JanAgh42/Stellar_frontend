@@ -6,6 +6,12 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.Toast
+import com.example.stellar.enums.ActivityTypes
+import com.example.stellar.functionalities.GeneralFunctionality
+import com.example.stellar.functionalities.ScrollCollectionsFunctionality
+import com.example.stellar.interfaces.IGeneralFunctionality
+import com.example.stellar.interfaces.IMandatoryOverrides
+import com.example.stellar.interfaces.IScrollCollectionsFunctionality
 
 class SearchActivity(
     general: IGeneralFunctionality = GeneralFunctionality(),

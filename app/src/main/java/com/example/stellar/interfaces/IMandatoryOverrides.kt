@@ -1,4 +1,4 @@
-package com.example.stellar
+package com.example.stellar.interfaces
 
 interface IMandatoryOverrides {
     fun attachListeners()

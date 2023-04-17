@@ -1,4 +1,4 @@
-package com.example.stellar
+package com.example.stellar.enums
 
 enum class GroupTags (val groupName: String) {
     SOCIAL_SCIENCES("Social Sciences"),

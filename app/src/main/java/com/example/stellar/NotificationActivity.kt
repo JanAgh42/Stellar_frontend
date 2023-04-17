@@ -6,6 +6,10 @@ import android.view.View
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.example.stellar.enums.ActivityTypes
+import com.example.stellar.functionalities.GeneralFunctionality
+import com.example.stellar.interfaces.IGeneralFunctionality
+import com.example.stellar.interfaces.IMandatoryOverrides
 
 class NotificationActivity(
     general: IGeneralFunctionality = GeneralFunctionality()

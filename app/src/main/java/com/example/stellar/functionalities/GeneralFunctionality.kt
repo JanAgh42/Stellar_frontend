@@ -1,15 +1,16 @@
-package com.example.stellar
+package com.example.stellar.functionalities
 
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.os.Build
 import android.view.View
 import android.widget.ImageButton
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.stellar.*
+import com.example.stellar.enums.ActivityTypes
+import com.example.stellar.interfaces.IGeneralFunctionality
 
 class GeneralFunctionality : IGeneralFunctionality {
 
@@ -30,7 +31,8 @@ class GeneralFunctionality : IGeneralFunctionality {
     override fun menuBarListeners(
         menuBar: View,
         context: Context,
-        activity: ActivityTypes)
+        activity: ActivityTypes
+    )
     {
         val menuHome = menuBar.findViewById<ImageButton>(R.id.menu_home)
         val menuProfile = menuBar.findViewById<ImageButton>(R.id.menu_profile)
