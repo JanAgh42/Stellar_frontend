@@ -2,23 +2,35 @@ package com.example.stellar
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.ContentResolver
+import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.location.Geocoder
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
 import android.view.View
 import android.widget.*
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.FileProvider
 import com.example.stellar.enums.ActivityTypes
 import com.example.stellar.functionalities.GeneralFunctionality
 import com.example.stellar.interfaces.IGeneralFunctionality
 import com.example.stellar.interfaces.IMandatoryOverrides
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.Priority
+import com.squareup.picasso.Picasso
+import java.io.File
+import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.*
 
 class CreatePostActivity(
     general: IGeneralFunctionality = GeneralFunctionality()
@@ -54,6 +66,8 @@ class CreatePostActivity(
     private lateinit var lManager: FusedLocationProviderClient
 
     private lateinit var pictureAction: ActivityResultLauncher<Intent>
+    private var imageUri: Uri? = null
+
 
     private val LOCATION_REQUEST_CODE = 10101
     private val CAMERA_REQUEST_CODE = 10100
@@ -170,8 +184,11 @@ class CreatePostActivity(
         }
 
         this.pictureAction = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            if (it.resultCode == Activity.RESULT_OK && it.data != null) {
-                this.handleReceivedImage(it)
+            if (it.resultCode == Activity.RESULT_OK) {
+                if (it.data != null) {
+                    this.imageUri = it.data?.data
+                }
+                this.handleReceivedImage()
             }
         }
     }
@@ -212,16 +229,29 @@ class CreatePostActivity(
     @SuppressLint("MissingPermission")
     @Suppress("DEPRECATION")
     private fun getUserLocation() {
-        this.lManager.lastLocation.addOnSuccessListener {
+        this.showLocation.setText(R.string.cpost_loading_loc)
+
+        this.lManager.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, null).addOnSuccessListener {
             try {
-                val coords = Geocoder(this)
+                val coords = Geocoder(this, Locale.GERMAN)
                     .getFromLocation(it.latitude, it.longitude, 1)!!
 
-                this.showLocation.text = "${coords[0].locality}, ${coords[0].countryCode}"
+                if (coords[0].countryCode == null) {
+                    throw Exception()
+                }
+
+                if(coords[0].locality == null) {
+                    this.showLocation.text = coords[0].countryName
+                    Toast.makeText(this, getString(R.string.cpost_country_only), Toast.LENGTH_SHORT).show()
+                }
+                else {
+                    this.showLocation.text = "${coords[0].locality}, ${coords[0].countryCode}"
+                }
+
                 this.hideLocation.visibility = View.VISIBLE
             } catch (e: Exception) {
                 this.showLocation.setText(R.string.cpost_no_location)
-                Toast.makeText(this, getString(R.string.cpost_location_toast), Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.cpost_no_location_t), Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -233,14 +263,33 @@ class CreatePostActivity(
 
     private fun getImageFromCamera() {
         val toCamera = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+
+        val imageFile: File? = try {
+            File(
+                getExternalFilesDir(Environment.DIRECTORY_PICTURES),
+                "camera_image.jpg"
+            )
+        } catch (ex: IOException) { null }
+
+        imageFile?.also { image ->
+            val uri: Uri = FileProvider.getUriForFile(
+                this,
+                "com.example.android.provider",
+                image
+            )
+            this.imageUri = uri
+            toCamera.putExtra(MediaStore.EXTRA_OUTPUT, uri)
+        }
+
+        toCamera.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
         this.pictureAction.launch(toCamera)
     }
 
-    private fun handleReceivedImage(result: ActivityResult) {
+    @Suppress("DEPRECATION")
+    private fun handleReceivedImage() {
         this.photoName.visibility = View.VISIBLE
         this.removePhoto.visibility = View.VISIBLE
 
-        val imageURI = result.data?.data
-        this.photoName.text = imageURI.toString()
+        Picasso.with(this).load(this.imageUri).into(findViewById<ImageView>(R.id.anyad))
     }
 }
