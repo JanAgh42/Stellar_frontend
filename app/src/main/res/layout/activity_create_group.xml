@@ -38,7 +38,9 @@
                 android:orientation="vertical"
                 android:layout_marginTop="30dp"
                 android:layout_marginHorizontal="20dp"
-                android:layout_marginBottom="70dp">
+                android:layout_marginBottom="70dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
 
                 <EditText
                     android:id="@+id/cgroup_group_name"

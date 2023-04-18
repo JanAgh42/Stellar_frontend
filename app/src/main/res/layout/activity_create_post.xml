@@ -62,23 +62,23 @@
                 android:background="@drawable/logreg_bkg_design"
                 android:backgroundTint="@color/component_bkg"
                 android:padding="10dp"
-                android:layout_marginTop="10dp">
-                <androidx.core.widget.NestedScrollView
+                android:layout_marginTop="10dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+                <EditText
+                    android:id="@+id/cpost_message"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <EditText
-                        android:id="@+id/cpost_message"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:minLines="12"
-                        android:maxLines="12"
-                        android:gravity="start"
-                        android:scrollbars="vertical"
-                        android:textColor="@color/text_gray"
-                        android:textColorHint="@color/text_gray"
-                        android:hint="@string/cpost_message_hint"
-                        android:background="@color/component_bkg"/>
-                </androidx.core.widget.NestedScrollView>
+                    android:layout_height="wrap_content"
+                    android:minLines="12"
+                    android:maxLines="12"
+                    android:gravity="start"
+                    android:scrollbars="vertical"
+                    android:textColor="@color/text_gray"
+                    android:textColorHint="@color/text_gray"
+                    android:hint="@string/cpost_message_hint"
+                    android:background="@color/component_bkg"/>
+
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
