@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.text.method.ScrollingMovementMethod
 import android.view.View
 import android.widget.*
 import androidx.activity.result.ActivityResult
@@ -134,7 +135,15 @@ class CreatePostActivity(
         this.lManager = LocationServices.getFusedLocationProviderClient(this)
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun attachListeners() {
+        messageContent.movementMethod = ScrollingMovementMethod()
+
+        messageContent.setOnTouchListener { v, _ ->
+            v.parent.requestDisallowInterceptTouchEvent(true)
+            false
+        }
+
         this.menuBarListeners(this.menuBar, this, ActivityTypes.CREATE_POST_ACTIVITY)
 
         this.topGoBack.setOnClickListener {

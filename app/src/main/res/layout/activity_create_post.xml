@@ -13,57 +13,59 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true" />
-
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingVertical="10dp"
-        android:paddingHorizontal="20dp"
         android:layout_below="@id/cpost_top_bar">
-        <TextView
-            android:id="@+id/cpost_message_type"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/cpost_new_message"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:layout_marginTop="20dp"/>
+            android:orientation="vertical"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="20dp">
+            <TextView
+                android:id="@+id/cpost_message_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cpost_new_message"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:layout_marginTop="20dp"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/logreg_bkg_design"
-            android:backgroundTint="@color/component_bkg"
-            android:padding="10dp"
-            android:layout_marginTop="10dp">
-            <TextView
-                android:id="@+id/cpost_recipient_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/cpost_philomenka"
-                android:textSize="16sp"
-                android:textColor="@color/text_gray"/>
-            <TextView
-                android:id="@+id/cpost_recipient_message"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/cpost_philomenka_threat"
-                android:textSize="16sp"
-                android:textColor="@color/text_gray"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/logreg_bkg_design"
-            android:backgroundTint="@color/component_bkg"
-            android:padding="10dp"
-            android:layout_marginTop="10dp">
-            <ScrollView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/logreg_bkg_design"
+                android:backgroundTint="@color/component_bkg"
+                android:padding="10dp"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:id="@+id/cpost_recipient_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cpost_philomenka"
+                    android:textSize="16sp"
+                    android:textColor="@color/text_gray"/>
+                <TextView
+                    android:id="@+id/cpost_recipient_message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cpost_philomenka_threat"
+                    android:textSize="16sp"
+                    android:textColor="@color/text_gray"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/logreg_bkg_design"
+                android:backgroundTint="@color/component_bkg"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
                 <EditText
                     android:id="@+id/cpost_message"
                     android:layout_width="match_parent"
@@ -76,105 +78,107 @@
                     android:textColorHint="@color/text_gray"
                     android:hint="@string/cpost_message_hint"
                     android:background="@color/component_bkg"/>
-            </ScrollView>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="15dp"
-            android:gravity="center_vertical">
-            <ImageButton
-                android:layout_width="wrap_content"
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/location_24" />
-            <TextView
-                android:id="@+id/cpost_location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/text_gray"
-                android:text="@string/cpost_clear_location"
-                android:layout_marginStart="5dp"/>
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-            <TextView
-                android:id="@+id/cpost_hide_location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/text_gray"
-                android:text="@string/cpost_hide_location"
-                android:textSize="16sp"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="15dp"/>
-        </LinearLayout>
-        <CheckBox
-            android:id="@+id/cpost_notify_all"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/text_gray"
-            android:text="@string/cpost_group_notif"
-            android:textSize="16sp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/cpost_photos"
-            android:layout_marginTop="10dp"
-            android:textSize="16sp" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <Button
-                android:id="@+id/cpost_camera"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/details_blue"
-                android:text="@string/cpost_camera"
-                android:textColor="@color/component_bkg"
-                android:textStyle="bold"
-                android:paddingVertical="5dp"
-                android:paddingHorizontal="10dp"
-                android:minHeight="0dp"
-                android:minWidth="0dp"
-                android:textAllCaps="false"
-                android:layout_marginEnd="10dp"/>
-            <Button
-                android:id="@+id/cpost_gallery"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/details_blue"
-                android:text="@string/cpost_gallery"
-                android:textColor="@color/component_bkg"
-                android:textStyle="bold"
-                android:paddingVertical="5dp"
-                android:paddingHorizontal="10dp"
-                android:minHeight="0dp"
-                android:minWidth="0dp"
-                android:textAllCaps="false"/>
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-            <TextView
-                android:id="@+id/cpost_remove_photo"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp"
+                android:gravity="center_vertical">
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/location_24" />
+                <TextView
+                    android:id="@+id/cpost_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_gray"
+                    android:text="@string/cpost_clear_location"
+                    android:layout_marginStart="5dp"/>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+                <TextView
+                    android:id="@+id/cpost_hide_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_gray"
+                    android:text="@string/cpost_hide_location"
+                    android:textSize="16sp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="15dp"/>
+            </LinearLayout>
+            <CheckBox
+                android:id="@+id/cpost_notify_all"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/text_gray"
-                android:text="@string/cpost_remove_photo"
-                android:textSize="16sp"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="15dp"/>
+                android:text="@string/cpost_group_notif"
+                android:textSize="16sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cpost_photos"
+                android:layout_marginTop="10dp"
+                android:textSize="16sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/cpost_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/details_blue"
+                    android:text="@string/cpost_camera"
+                    android:textColor="@color/component_bkg"
+                    android:textStyle="bold"
+                    android:paddingVertical="5dp"
+                    android:paddingHorizontal="10dp"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:textAllCaps="false"
+                    android:layout_marginEnd="10dp"/>
+                <Button
+                    android:id="@+id/cpost_gallery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/details_blue"
+                    android:text="@string/cpost_gallery"
+                    android:textColor="@color/component_bkg"
+                    android:textStyle="bold"
+                    android:paddingVertical="5dp"
+                    android:paddingHorizontal="10dp"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:textAllCaps="false"/>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+                <TextView
+                    android:id="@+id/cpost_remove_photo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_gray"
+                    android:text="@string/cpost_remove_photo"
+                    android:textSize="16sp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="15dp"/>
+            </LinearLayout>
+            <TextView
+                android:id="@+id/cpost_photo_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cpost_photo_name"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/text_gray"
+                android:layout_marginBottom="70dp"/>
         </LinearLayout>
-        <TextView
-            android:id="@+id/cpost_photo_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/cpost_photo_name"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/text_gray" />
-    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
     <include
         layout="@layout/app_menu_bar"

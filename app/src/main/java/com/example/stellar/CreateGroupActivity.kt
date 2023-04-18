@@ -1,24 +1,26 @@
 package com.example.stellar
 
+import android.content.res.ColorStateList
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.core.content.ContextCompat
 import com.example.stellar.enums.ActivityTypes
+import com.example.stellar.enums.Colors
 import com.example.stellar.functionalities.GeneralFunctionality
-import com.example.stellar.functionalities.ScrollCollectionsFunctionality
+import com.example.stellar.functionalities.CollectionsFunctionality
 import com.example.stellar.interfaces.IGeneralFunctionality
 import com.example.stellar.interfaces.IMandatoryOverrides
-import com.example.stellar.interfaces.IScrollCollectionsFunctionality
+import com.example.stellar.interfaces.ICollectionsFunctionality
 
 class CreateGroupActivity(
     general: IGeneralFunctionality = GeneralFunctionality(),
-    scrollCollections: IScrollCollectionsFunctionality = ScrollCollectionsFunctionality()
+    scrollCollections: ICollectionsFunctionality = CollectionsFunctionality()
 ) : AppCompatActivity(),
     IMandatoryOverrides,
     IGeneralFunctionality by general,
-    IScrollCollectionsFunctionality by scrollCollections {
+    ICollectionsFunctionality by scrollCollections {
 
     private lateinit var groupExample: LinearLayout
     private lateinit var iconsLayout: LinearLayout
@@ -33,25 +35,7 @@ class CreateGroupActivity(
 
     private lateinit var groupBkg: LinearLayout
 
-    private lateinit var groupBkgViolet: ImageButton
-    private lateinit var groupBkgOrange: ImageButton
-    private lateinit var groupBkgRed: ImageButton
-    private lateinit var groupBkgBlue: ImageButton
-    private lateinit var groupBkgGreen: ImageButton
-    private lateinit var groupBkgPink: ImageButton
-    private lateinit var groupBkgPurple: ImageButton
-    private lateinit var groupBkgTurquoise: ImageButton
-
     private lateinit var groupIconBkg: LinearLayout
-
-    private lateinit var groupIconBkgViolet: ImageButton
-    private lateinit var groupIconBkgOrange: ImageButton
-    private lateinit var groupIconBkgRed: ImageButton
-    private lateinit var groupIconBkgBlue: ImageButton
-    private lateinit var groupIconBkgGreen: ImageButton
-    private lateinit var groupIconBkgPink: ImageButton
-    private lateinit var groupIconBkgPurple: ImageButton
-    private lateinit var groupIconBkgTurquoise: ImageButton
 
     private lateinit var menuBar: LinearLayout
 
@@ -97,23 +81,7 @@ class CreateGroupActivity(
         this.exampleName = groupExample.findViewById(R.id.group_name)
         this.exampleNumMembers = groupExample.findViewById(R.id.group_num_members)
         this.groupBkg = findViewById(R.id.cgroup_bkg_color)
-        this.groupBkgViolet = groupBkg.findViewById(R.id.group_violet)
-        this.groupBkgOrange = groupBkg.findViewById(R.id.group_orange)
-        this.groupBkgRed = groupBkg.findViewById(R.id.group_red)
-        this.groupBkgBlue = groupBkg.findViewById(R.id.group_blue)
-        this.groupBkgGreen = groupBkg.findViewById(R.id.group_green)
-        this.groupBkgPink = groupBkg.findViewById(R.id.group_pink)
-        this.groupBkgPurple = groupBkg.findViewById(R.id.group_purple)
-        this.groupBkgTurquoise = groupBkg.findViewById(R.id.group_turquoise)
         this.groupIconBkg = findViewById(R.id.cgroup_icon_bkg_color)
-        this.groupIconBkgViolet = groupIconBkg.findViewById(R.id.group_violet)
-        this.groupIconBkgOrange = groupIconBkg.findViewById(R.id.group_orange)
-        this.groupIconBkgRed = groupIconBkg.findViewById(R.id.group_red)
-        this.groupIconBkgBlue = groupIconBkg.findViewById(R.id.group_blue)
-        this.groupIconBkgGreen = groupIconBkg.findViewById(R.id.group_green)
-        this.groupIconBkgPink = groupIconBkg.findViewById(R.id.group_pink)
-        this.groupIconBkgPurple = groupIconBkg.findViewById(R.id.group_purple)
-        this.groupIconBkgTurquoise = groupIconBkg.findViewById(R.id.group_turquoise)
         this.iconsLayout = findViewById(R.id.cgroup_icons_layout)
         this.tagsLayout = findViewById(R.id.cgroup_tags_layout)
         this.menuBar = findViewById(R.id.cgroup_menu_bar)
@@ -126,6 +94,8 @@ class CreateGroupActivity(
 
         this.generateDynamicIcons(this.iconsLayout, this, this::getIconData)
         this.generateDynamicTags(this.tagsLayout, this, this::getTagData)
+        this.generateDynamicColors(this.groupBkg, this, this::getGroupColorData, Colors.groupColors)
+        this.generateDynamicColors(this.groupIconBkg, this, this::getIconColorData, Colors.groupColors)
     }
 
     override fun setDefaultValues() {
@@ -160,6 +130,18 @@ class CreateGroupActivity(
     }
 
     private fun getTagData(text: String) {
+        Toast.makeText(this, text, Toast.LENGTH_LONG).show()
+    }
 
+    private fun getGroupColorData(text: String) {
+        this.groupExample.backgroundTintList = ColorStateList
+            .valueOf(ContextCompat.getColor(this, text.toInt()))
+        Toast.makeText(this, "group " + text, Toast.LENGTH_LONG).show()
+    }
+
+    private fun getIconColorData(text: String) {
+        this.exampleIconBackground.backgroundTintList = ColorStateList
+            .valueOf(ContextCompat.getColor(this, text.toInt()))
+        Toast.makeText(this, "anyad " + text, Toast.LENGTH_LONG).show()
     }
 }
