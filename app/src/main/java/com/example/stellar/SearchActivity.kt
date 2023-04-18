@@ -8,18 +8,18 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import com.example.stellar.enums.ActivityTypes
 import com.example.stellar.functionalities.GeneralFunctionality
-import com.example.stellar.functionalities.ScrollCollectionsFunctionality
+import com.example.stellar.functionalities.CollectionsFunctionality
 import com.example.stellar.interfaces.IGeneralFunctionality
 import com.example.stellar.interfaces.IMandatoryOverrides
-import com.example.stellar.interfaces.IScrollCollectionsFunctionality
+import com.example.stellar.interfaces.ICollectionsFunctionality
 
 class SearchActivity(
     general: IGeneralFunctionality = GeneralFunctionality(),
-    scrollCollections: IScrollCollectionsFunctionality = ScrollCollectionsFunctionality()
+    scrollCollections: ICollectionsFunctionality = CollectionsFunctionality()
 ) : AppCompatActivity(),
     IMandatoryOverrides,
     IGeneralFunctionality by general,
-    IScrollCollectionsFunctionality by scrollCollections {
+    ICollectionsFunctionality by scrollCollections {
 
     private lateinit var searchBar: EditText
 

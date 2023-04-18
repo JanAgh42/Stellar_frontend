@@ -7,6 +7,7 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.LinearLayout.LayoutParams
@@ -16,9 +17,9 @@ import androidx.core.view.children
 import com.example.stellar.enums.GroupIcons
 import com.example.stellar.enums.GroupTags
 import com.example.stellar.R
-import com.example.stellar.interfaces.IScrollCollectionsFunctionality
+import com.example.stellar.interfaces.ICollectionsFunctionality
 
-class ScrollCollectionsFunctionality : IScrollCollectionsFunctionality {
+class CollectionsFunctionality : ICollectionsFunctionality {
 
     override fun generateDynamicTags(parent: LinearLayout, context: Context, callback: (text: String) -> Unit) {
         enumValues<GroupTags>().forEach {
@@ -64,6 +65,44 @@ class ScrollCollectionsFunctionality : IScrollCollectionsFunctionality {
         }
     }
 
+    override fun generateDynamicColors(parent: LinearLayout, context: Context, callback: (text: String) -> Unit, colors: List<Int>) {
+        val colorsNum = colors.size
+
+        for ((currentColor, color) in colors.withIndex()) {
+            val iconShape = FrameLayout(context)
+            val iconBorder = ImageButton(context)
+            val layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
+            iconShape.layoutParams = layoutParams
+            iconShape.background = ContextCompat.getDrawable(context, R.drawable.select_color_circle)
+            iconShape.backgroundTintList = ColorStateList
+                .valueOf(ContextCompat.getColor(context, color))
+            iconBorder.tag = color
+
+            iconBorder.layoutParams = layoutParams
+            iconBorder.background = null
+            iconShape.addView(iconBorder)
+
+            iconShape.setOnClickListener{ btn ->
+                callback((btn as FrameLayout).getChildAt(0).tag.toString())
+                this.changeSiblingBorder(parent)
+                iconBorder.background = ContextCompat.getDrawable(context, R.drawable.color_btn_border)
+            }
+            iconBorder.setOnClickListener{ btn ->
+                callback(btn.tag.toString())
+                this.changeSiblingBorder(parent)
+                iconBorder.background = ContextCompat.getDrawable(context, R.drawable.color_btn_border)
+            }
+            parent.addView(iconShape)
+
+            if (currentColor < colorsNum) {
+                val view = View(context)
+                val viewParams = LayoutParams(LayoutParams.WRAP_CONTENT, 0, 1.0f)
+                view.layoutParams = viewParams
+                parent.addView(view)
+            }
+        }
+    }
+
     private fun marginToDp(value: Int): Int {
         return TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP,
@@ -75,6 +114,16 @@ class ScrollCollectionsFunctionality : IScrollCollectionsFunctionality {
         parent.children.forEach {
             it.backgroundTintList = ColorStateList
                 .valueOf(ContextCompat.getColor(context, R.color.details_blue))
+        }
+    }
+
+    private fun changeSiblingBorder(parent: LinearLayout) {
+        for ((index, child) in parent.children.withIndex()) {
+            if (index % 2 != 0) {
+                continue
+            }
+            val layout = child as FrameLayout
+            layout.getChildAt(0).background = null
         }
     }
 }

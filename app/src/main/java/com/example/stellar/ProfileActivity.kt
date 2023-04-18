@@ -2,22 +2,24 @@ package com.example.stellar
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
+import androidx.core.content.ContextCompat
 import com.example.stellar.enums.ActivityTypes
+import com.example.stellar.enums.Colors
 import com.example.stellar.functionalities.GeneralFunctionality
+import com.example.stellar.functionalities.CollectionsFunctionality
 import com.example.stellar.interfaces.IGeneralFunctionality
 import com.example.stellar.interfaces.IMandatoryOverrides
+import com.example.stellar.interfaces.ICollectionsFunctionality
 import de.hdodenhof.circleimageview.CircleImageView
 
 class ProfileActivity(
-    general: IGeneralFunctionality = GeneralFunctionality()
+    general: IGeneralFunctionality = GeneralFunctionality(),
+    scrollCollections: ICollectionsFunctionality = CollectionsFunctionality()
 ) : AppCompatActivity(),
     IMandatoryOverrides,
-    IGeneralFunctionality by general {
+    IGeneralFunctionality by general,
+    ICollectionsFunctionality by scrollCollections{
 
     private lateinit var profilePhoto: CircleImageView
     private lateinit var profileToNotificationsBtn: ImageButton
@@ -29,15 +31,8 @@ class ProfileActivity(
     private lateinit var profileEditBtn: ImageButton
     private lateinit var profileUsernameField: EditText
     private lateinit var profileEmailField: EditText
-
-    private lateinit var profileUsernameWhite: ImageButton
-    private lateinit var profileUsernameRed: ImageButton
-    private lateinit var profileUsernameBlue: ImageButton
-    private lateinit var profileUsernameGreen: ImageButton
-    private lateinit var profileUsernamePink: ImageButton
-    private lateinit var profileUsernamePurple: ImageButton
-    private lateinit var profileUsernameYellow: ImageButton
-    private lateinit var profileUsernameTurquoise: ImageButton
+    private lateinit var profileColorsLayout: LinearLayout
+    private lateinit var profileSettingsLayout: LinearLayout
 
     private lateinit var menuBar: LinearLayout
 
@@ -76,15 +71,11 @@ class ProfileActivity(
         this.profileEditBtn = findViewById(R.id.profile_edit_btn)
         this.profileUsernameField = findViewById(R.id.profile_username_field)
         this.profileEmailField = findViewById(R.id.profile_email_field)
-        this.profileUsernameWhite = findViewById(R.id.profile_username_white)
-        this.profileUsernameRed = findViewById(R.id.profile_username_red)
-        this.profileUsernameBlue = findViewById(R.id.profile_username_blue)
-        this.profileUsernameGreen = findViewById(R.id.profile_username_green)
-        this.profileUsernamePink = findViewById(R.id.profile_username_pink)
-        this.profileUsernamePurple = findViewById(R.id.profile_username_purple)
-        this.profileUsernameYellow = findViewById(R.id.profile_username_yellow)
-        this.profileUsernameTurquoise = findViewById(R.id.profile_username_turquoise)
+        this.profileColorsLayout = findViewById(R.id.profile_colors_layout)
+        this.profileSettingsLayout = findViewById(R.id.profile_settings_layout)
         this.menuBar = findViewById(R.id.profile_menu_bar)
+
+        this.generateDynamicColors(this.profileColorsLayout, this, this::getProfileColorData, Colors.profileColors)
     }
 
     override fun setDefaultValues() {
@@ -102,4 +93,10 @@ class ProfileActivity(
     override fun detachListeners() {
         this.profileToNotificationsBtn.setOnClickListener(null)
     }
+
+    private fun getProfileColorData(text: String) {
+        this.profileUsername.setTextColor(ContextCompat.getColor(this, text.toInt()))
+            Toast.makeText(this, "group " + text, Toast.LENGTH_LONG).show()
+    }
+
 }
