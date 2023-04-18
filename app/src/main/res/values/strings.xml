@@ -28,7 +28,9 @@
     <string name="cpost_hide_location">Hide</string>
     <string name="cpost_clear_location">Show my location</string>
     <string name="cpost_no_location">Could not locate</string>
-    <string name="cpost_location_toast">Turn on your GPS to get current location</string>
+    <string name="cpost_no_location_t">Turn on your GPS and internet to get current location</string>
+    <string name="cpost_country_only">GPS signal low - only country located</string>
+    <string name="cpost_loading_loc">Loading location…</string>
     <string name="cpost_photos">Attached photo</string>
     <string name="cpost_remove_photo">Remove</string>
     <string name="cpost_photo_name">Photo name</string>
