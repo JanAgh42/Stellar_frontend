@@ -17,6 +17,10 @@ interface ICollectionsFunctionality {
         parent: LinearLayout,
         context: Context,
         callback: (text: String) -> Unit,
-        colors: List<Int>
-    )
+        colors: List<Int>,
+        isGroup: Boolean)
+    fun makeColorButtonsClickable(
+        parent: LinearLayout,
+        context: Context,
+        callback: (text: String) -> Unit)
 }

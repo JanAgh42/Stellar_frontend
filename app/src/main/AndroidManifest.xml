@@ -47,10 +47,6 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".ProfileActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".CreatePostActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -59,13 +55,19 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".CreatePostActivity"
+            android:exported="false"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
             android:name=".SearchActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".RegisterActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait">
+        </activity>
         <activity
             android:name=".LoginActivity"
             android:exported="false"
