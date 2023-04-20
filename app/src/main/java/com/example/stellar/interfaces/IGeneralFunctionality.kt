@@ -2,6 +2,7 @@ package com.example.stellar.interfaces
 
 import android.app.Activity
 import android.content.Context
+import android.view.MenuItem
 import android.view.View
 import com.example.stellar.enums.ActivityTypes
 
@@ -9,7 +10,8 @@ interface IGeneralFunctionality {
     fun changeActivity(
         current: Context,
         new: Class<*>,
-        data: Map<String, java.io.Serializable>? = null)
+        data: Map<String, java.io.Serializable>? = null
+    )
     fun menuBarListeners(
         menuBar: View,
         context: Context,
@@ -20,5 +22,12 @@ interface IGeneralFunctionality {
         code: Int,
         appContext: Context,
         activity: Activity,
-        callback: () -> Unit)
+        callback: () -> Unit
+    )
+    fun openPopupMenu(
+        context: Context,
+        view: View,
+        menuId: Int,
+        callback: (item: MenuItem) -> Unit
+    )
 }

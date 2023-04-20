@@ -30,7 +30,8 @@
                 android:text="@string/cpost_new_message"
                 android:textStyle="bold"
                 android:textSize="20sp"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="20dp"
+                android:textColor="@color/white"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -123,7 +124,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/cpost_photos"
                 android:layout_marginTop="10dp"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textColor="@color/white"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -169,14 +171,27 @@
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="15dp"/>
             </LinearLayout>
-            <TextView
-                android:id="@+id/cpost_photo_name"
+            <LinearLayout
+                android:id="@+id/cpost_photo_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/cpost_photo_name"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/text_gray"
-                android:layout_marginBottom="70dp"/>
+                android:orientation="horizontal"
+                android:layout_marginBottom="80dp"
+                android:layout_marginTop="10dp">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/done_24"
+                    android:layout_marginEnd="5dp"
+                    android:layout_gravity="center_vertical"/>
+                <TextView
+                    android:id="@+id/cpost_photo_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cpost_photo_name"
+                    android:textColor="@color/text_gray"
+                    android:layout_gravity="center_vertical"/>
+            </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

@@ -14,10 +14,14 @@
     <string name="login_password_hint">password</string>
     <string name="login_sign_in">Sign in</string>
     <string name="login_to_register">To register</string>
+    <string name="login_invalid_email">Invalid email address format</string>
 
     <string name="register_rep_password">repeat password</string>
     <string name="register_create_account">Create account</string>
     <string name="register_to_login">To login</string>
+    <string name="register_invalid_email">Invalid email address format</string>
+    <string name="register_invalid_pass">Invalid password format</string>
+    <string name="register_not_equal">Passwords are not equal</string>
 
     <string name="cpost_create_button">Post</string>
     <string name="cpost_new_message">New message:</string>
@@ -36,6 +40,7 @@
     <string name="cpost_photo_name">Photo name</string>
     <string name="cpost_camera">Camera</string>
     <string name="cpost_gallery">Gallery</string>
+    <string name="cpost_empty_message">Message cannot be empty</string>
 
     <string name="cgroup_create_button">Save</string>
 
