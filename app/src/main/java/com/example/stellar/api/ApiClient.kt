@@ -32,7 +32,7 @@ class ApiClient {
         return this.retrofit
     }
 
-    fun getUserService(service: ServiceTypes) : Any {
+    fun getService(service: ServiceTypes) : BaseService {
         return when (service) {
             ServiceTypes.AUTH -> this.getClient().create(AuthService::class.java) as AuthService
             ServiceTypes.USER -> this.getClient().create(UserService::class.java) as UserService

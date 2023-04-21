@@ -24,6 +24,9 @@ import com.example.stellar.enums.ActivityTypes
 import com.example.stellar.functionalities.GeneralFunctionality
 import com.example.stellar.interfaces.IGeneralFunctionality
 import com.example.stellar.interfaces.IMandatoryOverrides
+import com.example.stellar.api.models.Message
+import com.example.stellar.enums.ApiCallTypes
+import com.example.stellar.interfaces.IApiOverrides
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
@@ -37,6 +40,7 @@ class CreatePostActivity(
     general: IGeneralFunctionality = GeneralFunctionality()
 ) : AppCompatActivity(),
     IMandatoryOverrides,
+    IApiOverrides,
     IGeneralFunctionality by general {
 
     private lateinit var messageTypeTitle: TextView
@@ -63,12 +67,13 @@ class CreatePostActivity(
     private lateinit var topMessage: ImageButton
 
     private lateinit var menuBar: LinearLayout
+    private lateinit var photoInfo: LinearLayout
 
     private lateinit var lManager: FusedLocationProviderClient
 
     private lateinit var pictureAction: ActivityResultLauncher<Intent>
+    private lateinit var data: Message
     private var imageUri: Uri? = null
-
 
     private val LOCATION_REQUEST_CODE = 10101
     private val CAMERA_REQUEST_CODE = 10100
@@ -118,6 +123,7 @@ class CreatePostActivity(
         this.openGallery = findViewById(R.id.cpost_gallery)
         this.removePhoto = findViewById(R.id.cpost_remove_photo)
         this.photoName = findViewById(R.id.cpost_photo_name)
+        this.photoInfo = findViewById(R.id.cpost_photo_info)
     }
 
     override fun setDefaultValues() {
@@ -128,7 +134,7 @@ class CreatePostActivity(
         this.hideLocation.visibility = View.INVISIBLE
 
         this.removePhoto.visibility = View.INVISIBLE
-        this.photoName.visibility = View.INVISIBLE
+        this.photoInfo.visibility = View.INVISIBLE
 
         this.topButton.setText(R.string.cpost_create_button)
 
@@ -151,7 +157,13 @@ class CreatePostActivity(
         }
 
         this.topButton.setOnClickListener {
-            finish()
+            if (this.messageContent.text.toString().isBlank()) {
+                Toast.makeText(this, R.string.cpost_empty_message, Toast.LENGTH_SHORT).show()
+            }
+            else {
+                this.constructObject()
+                this.callApi(ApiCallTypes.POST)
+            }
         }
 
         this.showLocation.setOnClickListener {
@@ -170,7 +182,7 @@ class CreatePostActivity(
 
         this.removePhoto.setOnClickListener {
             this.photoName.setText(R.string.cpost_photo_name)
-            this.photoName.visibility = View.INVISIBLE
+            this.photoInfo.visibility = View.INVISIBLE
             this.removePhoto.visibility = View.INVISIBLE
         }
 
@@ -235,6 +247,30 @@ class CreatePostActivity(
         }
     }
 
+    override fun constructObject() {
+        val location = this.showLocation.text.toString()
+
+        this.data = Message(
+            id = null,
+            userId = "",
+            groupId = "",
+            replyToId = "",
+            message = this.messageContent.text.toString(),
+            location = if (location != getString(R.string.cpost_clear_location)
+                && location != getString(R.string.cpost_no_location)) location else null,
+            imageUrl = if (this.imageUri != null) this.uploadImage() else null
+        )
+    }
+
+    override fun callApi(type: ApiCallTypes) {
+        when (type) {
+            ApiCallTypes.POST -> {
+
+            }
+            else -> {}
+        }
+    }
+
     @SuppressLint("MissingPermission")
     @Suppress("DEPRECATION")
     private fun getUserLocation() {
@@ -242,12 +278,8 @@ class CreatePostActivity(
 
         this.lManager.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, null).addOnSuccessListener {
             try {
-                val coords = Geocoder(this, Locale.GERMAN)
+                val coords = Geocoder(this, Locale.ENGLISH)
                     .getFromLocation(it.latitude, it.longitude, 1)!!
-
-                if (coords[0].countryCode == null) {
-                    throw Exception()
-                }
 
                 if(coords[0].locality == null) {
                     this.showLocation.text = coords[0].countryName
@@ -281,11 +313,7 @@ class CreatePostActivity(
         } catch (ex: IOException) { null }
 
         imageFile?.also { image ->
-            val uri: Uri = FileProvider.getUriForFile(
-                this,
-                "com.example.android.provider",
-                image
-            )
+            val uri: Uri = FileProvider.getUriForFile(this, "com.example.android.provider", image)
             this.imageUri = uri
             toCamera.putExtra(MediaStore.EXTRA_OUTPUT, uri)
         }
@@ -294,11 +322,14 @@ class CreatePostActivity(
         this.pictureAction.launch(toCamera)
     }
 
-    @Suppress("DEPRECATION")
     private fun handleReceivedImage() {
-        this.photoName.visibility = View.VISIBLE
+        this.photoInfo.visibility = View.VISIBLE
         this.removePhoto.visibility = View.VISIBLE
 
-        Picasso.with(this).load(this.imageUri).into(findViewById<ImageView>(R.id.anyad))
+        this.photoName.text = this.imageUri?.lastPathSegment.toString().substringAfterLast('/')
+    }
+
+    private fun uploadImage(): String {
+        return ""
     }
 }

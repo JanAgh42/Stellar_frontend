@@ -4,8 +4,10 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageButton
+import android.widget.PopupMenu
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.stellar.*
@@ -97,6 +99,16 @@ class GeneralFunctionality : IGeneralFunctionality {
         }
         else {
             callback()
+        }
+    }
+
+    override fun openPopupMenu(context: Context, view: View, menuId: Int, callback: (item: MenuItem) -> Unit) {
+        val popup = PopupMenu(context, view)
+        popup.menuInflater.inflate(menuId, popup.menu)
+
+        popup.setOnMenuItemClickListener { item ->
+            callback(item)
+            true
         }
     }
 }

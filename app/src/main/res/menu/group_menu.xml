@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_group_delete"
+        android:title="Delete group"
+        android:colorForeground="@color/black" />
+    <item
+        android:id="@+id/nav_group_update"
+        android:title="Update group" />
+    <item
+        android:id="@+id/nav_group_leave"
+        android:title="Leave group"/>
+</menu>
