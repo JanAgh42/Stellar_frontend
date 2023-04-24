@@ -6,6 +6,12 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
+import androidx.work.WorkManager
+import com.example.stellar.api.models.User
+import com.example.stellar.data.LocalData
+import com.example.stellar.data.LocalData.trigger
+import com.example.stellar.data.viewmodels.UserViewModel
 import com.example.stellar.enums.ActivityTypes
 import com.example.stellar.functionalities.GeneralFunctionality
 import com.example.stellar.interfaces.IGeneralFunctionality
@@ -30,6 +36,10 @@ class MainActivity(
 
     private lateinit var menuBar: LinearLayout
 
+    private val viewModel: UserViewModel by lazy {
+        ViewModelProvider(this)[UserViewModel::class.java]
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -41,6 +51,7 @@ class MainActivity(
         super.onStart()
 
         this.attachListeners()
+        this.setDefaultValues()
     }
 
     override fun onStop() {
@@ -52,6 +63,7 @@ class MainActivity(
     override fun onPause() {
         super.onPause()
         overridePendingTransition(0,0)
+        WorkManager.getInstance(applicationContext).cancelAllWorkByTag("loadUserData")
     }
 
     override fun loadViews() {
@@ -65,7 +77,14 @@ class MainActivity(
         this.menuBar = findViewById(R.id.main_menu_bar)
     }
 
-    override fun setDefaultValues() {}
+    override fun setDefaultValues() {
+        if (LocalData.user.value == null) {
+            this.viewModel.getUser(applicationContext, LocalData.identity)
+        }
+        else {
+            LocalData.user.trigger()
+        }
+    }
 
     override fun attachListeners() {
         this.menuBarListeners(this.menuBar, this, ActivityTypes.MAIN_ACTIVITY)
@@ -85,6 +104,13 @@ class MainActivity(
         this.ownGroups.setOnClickListener {
 
         }
+
+        LocalData.user.observe(this) { user ->
+            if (user == null) {
+                return@observe
+            }
+            this.displayData(user)
+        }
     }
 
     override fun detachListeners() {
@@ -92,5 +118,10 @@ class MainActivity(
         this.profilePicture.setOnClickListener(null)
         this.allGroups.setOnEditorActionListener(null)
         this.ownGroups.setOnEditorActionListener(null)
+    }
+
+    private fun displayData(user: User) {
+        this.usernameText.text = user.name
+        this.groupMemberText.text = "Member of ${user.groups} groups"
     }
 }

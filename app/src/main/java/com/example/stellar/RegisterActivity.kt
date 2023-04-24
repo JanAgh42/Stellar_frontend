@@ -5,7 +5,10 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import com.example.stellar.api.models.AuthRequest
+import com.example.stellar.data.LocalData
+import com.example.stellar.data.viewmodels.AuthViewModel
 import com.example.stellar.enums.ApiCallTypes
 import com.example.stellar.functionalities.AuthFunctionality
 import com.example.stellar.functionalities.GeneralFunctionality
@@ -32,6 +35,10 @@ class RegisterActivity(
     private lateinit var toLoginButton: Button
 
     private lateinit var data: AuthRequest
+
+    private val viewModel: AuthViewModel by lazy {
+        ViewModelProvider(this)[AuthViewModel::class.java]
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -112,7 +119,17 @@ class RegisterActivity(
     override fun callApi(type: ApiCallTypes) {
         when (type) {
             ApiCallTypes.POST -> {
+                this.viewModel.registerUser(this.data)
+                this.viewModel.authData.observe(this) {auth ->
+                    if (auth == null) {
+                        Toast.makeText(this, "Internet connection error", Toast.LENGTH_SHORT).show()
+                        return@observe
+                    }
 
+                    LocalData.setAuthData(auth)
+                    Toast.makeText(this, "Successfull registration", Toast.LENGTH_SHORT).show()
+                    this.changeActivity(this, MainActivity::class.java)
+                }
             }
             else -> {}
         }

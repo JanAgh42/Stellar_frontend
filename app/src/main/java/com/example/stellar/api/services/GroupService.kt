@@ -12,18 +12,19 @@ interface GroupService : BaseService {
         @Path("group_id") groupId: String
     ): Response<Group>
 
-    @GET("groups/{user_id}/owner")
-    suspend fun getOwnGroups(
-        @Header("user") identity: String,
-        @Header("token") token: String,
-        @Path("user_id") userId: String
-    ): Response<List<Group>>
-
     @GET("groups/{user_id}/all")
     suspend fun getAllGroups(
         @Header("user") identity: String,
         @Header("token") token: String,
         @Path("user_id") userId: String
+    ): Response<List<Group>>
+
+    @GET("groups/search")
+    suspend fun searchGroups(
+        @Header("user") identity: String,
+        @Header("token") token: String,
+        @Query("category") category: String?,
+        @Query("name") name: String?
     ): Response<List<Group>>
 
     @POST("groups")

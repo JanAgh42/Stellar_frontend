@@ -20,16 +20,23 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
+import androidx.lifecycle.ViewModelProvider
+import androidx.work.WorkManager
 import com.example.stellar.enums.ActivityTypes
 import com.example.stellar.functionalities.GeneralFunctionality
 import com.example.stellar.interfaces.IGeneralFunctionality
 import com.example.stellar.interfaces.IMandatoryOverrides
 import com.example.stellar.api.models.Message
+import com.example.stellar.data.DataPipeline
+import com.example.stellar.data.LocalData
+import com.example.stellar.data.viewmodels.AuthViewModel
+import com.example.stellar.data.viewmodels.MessageViewModel
 import com.example.stellar.enums.ApiCallTypes
 import com.example.stellar.interfaces.IApiOverrides
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
+import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import java.io.File
 import java.io.IOException
@@ -73,11 +80,17 @@ class CreatePostActivity(
 
     private lateinit var pictureAction: ActivityResultLauncher<Intent>
     private lateinit var data: Message
+    private var replyToId: String? = null
     private var imageUri: Uri? = null
+    private var uploadChecker = false
 
     private val LOCATION_REQUEST_CODE = 10101
     private val CAMERA_REQUEST_CODE = 10100
     private val GALLERY_REQUEST_CODE = 10111
+
+    private val viewModel: MessageViewModel by lazy {
+        ViewModelProvider(this)[MessageViewModel::class.java]
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -162,7 +175,6 @@ class CreatePostActivity(
             }
             else {
                 this.constructObject()
-                this.callApi(ApiCallTypes.POST)
             }
         }
 
@@ -184,6 +196,7 @@ class CreatePostActivity(
             this.photoName.setText(R.string.cpost_photo_name)
             this.photoInfo.visibility = View.INVISIBLE
             this.removePhoto.visibility = View.INVISIBLE
+            this.imageUri = null
         }
 
         this.openGallery.setOnClickListener {
@@ -252,20 +265,42 @@ class CreatePostActivity(
 
         this.data = Message(
             id = null,
-            userId = "",
-            groupId = "",
-            replyToId = "",
+            userId = LocalData.identity,
+            groupId = LocalData.identity,
+            replyToId = this.replyToId,
             message = this.messageContent.text.toString(),
             location = if (location != getString(R.string.cpost_clear_location)
                 && location != getString(R.string.cpost_no_location)) location else null,
-            imageUrl = if (this.imageUri != null) this.uploadImage() else null
+            imageUrl = null
         )
+        this.callApi(ApiCallTypes.POST)
     }
 
     override fun callApi(type: ApiCallTypes) {
         when (type) {
             ApiCallTypes.POST -> {
+                if (this.uploadChecker) {
+                    return
+                }
+                WorkManager.getInstance(applicationContext).cancelAllWorkByTag("postNewMessage")
+                this.uploadChecker = true
 
+                val filetype = if (this.imageUri != null)
+                    this.photoName.text.toString().substringAfterLast('.')
+                    else null
+
+                DataPipeline.messages.add(this.data.copy())
+
+                this.viewModel.createMessage(applicationContext, this.imageUri, filetype)
+
+                LocalData.boolValues.observe(this) { message ->
+                    if (message!!) {
+                        Toast.makeText(this, "Post succesful", Toast.LENGTH_SHORT).show()
+                    }
+                    else {
+                        Toast.makeText(this, "Post unsuccesful", Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
             else -> {}
         }
@@ -327,9 +362,5 @@ class CreatePostActivity(
         this.removePhoto.visibility = View.VISIBLE
 
         this.photoName.text = this.imageUri?.lastPathSegment.toString().substringAfterLast('/')
-    }
-
-    private fun uploadImage(): String {
-        return ""
     }
 }

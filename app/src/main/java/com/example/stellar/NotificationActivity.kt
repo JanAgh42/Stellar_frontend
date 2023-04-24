@@ -6,6 +6,13 @@ import android.view.View
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
+import androidx.work.WorkManager
+import com.example.stellar.data.LocalData
+import com.example.stellar.data.LocalData.trigger
+import com.example.stellar.data.viewmodels.NotificationViewModel
+import com.example.stellar.data.viewmodels.UserViewModel
 import com.example.stellar.enums.ActivityTypes
 import com.example.stellar.functionalities.GeneralFunctionality
 import com.example.stellar.interfaces.IGeneralFunctionality
@@ -29,18 +36,22 @@ class NotificationActivity(
     private lateinit var topButton: TextView
     private lateinit var topMessage: ImageButton
 
+    private val viewModel: NotificationViewModel by lazy {
+        ViewModelProvider(this)[NotificationViewModel::class.java]
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notification)
 
         this.loadViews()
-        this.setDefaultValues()
     }
 
     override fun onStart() {
         super.onStart()
 
         this.attachListeners()
+        this.setDefaultValues()
     }
 
     override fun onStop() {
@@ -52,6 +63,7 @@ class NotificationActivity(
     override fun onPause() {
         super.onPause()
         overridePendingTransition(0, 0)
+        WorkManager.getInstance(applicationContext).cancelAllWorkByTag("getNotifications")
     }
 
     override fun loadViews() {
@@ -72,6 +84,13 @@ class NotificationActivity(
         this.topButton.visibility = View.VISIBLE
 
         this.topButton.setText(R.string.notif_delete_all_button)
+
+        if (LocalData.userNotifs.value == null) {
+            this.viewModel.getUserNotifs(applicationContext, LocalData.identity)
+        }
+        else {
+            LocalData.userNotifs.trigger()
+        }
     }
 
     override fun attachListeners() {
@@ -83,6 +102,13 @@ class NotificationActivity(
 
         this.topButton.setOnClickListener {
             finish()
+        }
+
+        LocalData.userNotifs.observe(this) { list ->
+            if (list == null) {
+                return@observe
+            }
+            Toast.makeText(this, "notifs here", Toast.LENGTH_SHORT).show()
         }
     }
 

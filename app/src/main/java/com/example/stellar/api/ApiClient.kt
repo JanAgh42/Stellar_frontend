@@ -6,8 +6,9 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
-class ApiClient {
+object ApiClient {
 
     private lateinit var retrofit: Retrofit
     private lateinit var interceptor: HttpLoggingInterceptor
@@ -19,26 +20,23 @@ class ApiClient {
 
         this.client = OkHttpClient
             .Builder()
+            .connectTimeout(5, TimeUnit.SECONDS)
             .addInterceptor(this.interceptor)
             .build()
 
         this.retrofit = Retrofit
             .Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("http://127.0.0.1:8000/api/")
+            .baseUrl("http://10.0.2.2:8000/api/")
             .client(this.client)
             .build()
 
         return this.retrofit
     }
 
-    fun getService(service: ServiceTypes) : BaseService {
-        return when (service) {
-            ServiceTypes.AUTH -> this.getClient().create(AuthService::class.java) as AuthService
-            ServiceTypes.USER -> this.getClient().create(UserService::class.java) as UserService
-            ServiceTypes.GROUP -> this.getClient().create(GroupService::class.java) as GroupService
-            ServiceTypes.MESSAGE -> this.getClient().create(MessageService::class.java) as MessageService
-            ServiceTypes.NOTIFICATION -> this.getClient().create(NotificationService::class.java) as NotificationService
-        }
-    }
+    val authService = this.getClient().create(AuthService::class.java) as AuthService
+    val userService = this.getClient().create(UserService::class.java) as UserService
+    val groupService = this.getClient().create(GroupService::class.java) as GroupService
+    val messageService = this.getClient().create(MessageService::class.java) as MessageService
+    val notificationService = this.getClient().create(NotificationService::class.java) as NotificationService
 }

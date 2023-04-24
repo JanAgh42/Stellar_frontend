@@ -30,13 +30,20 @@ class CollectionsFunctionality : ICollectionsFunctionality {
             tag.layoutParams = layoutParams
 
             tag.setOnClickListener { view ->
+                val wasSelected = view.backgroundTintList == ColorStateList
+                    .valueOf(ContextCompat.getColor(context, R.color.group_orange))
+
                 callback(
+                    if (wasSelected)
                     (view as FrameLayout).findViewById<TextView>(R.id.tag_title).text.toString()
+                    else ""
                 )
                 this.changeSiblingColor(parent, context)
 
-                view.backgroundTintList = ColorStateList
-                    .valueOf(ContextCompat.getColor(context, R.color.group_orange))
+                if (!wasSelected) {
+                    view.backgroundTintList = ColorStateList
+                        .valueOf(ContextCompat.getColor(context, R.color.group_orange))
+                }
             }
 
             tag.findViewById<TextView>(R.id.tag_title).text = it.groupName

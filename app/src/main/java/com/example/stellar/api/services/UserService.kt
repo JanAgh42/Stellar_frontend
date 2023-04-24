@@ -27,13 +27,6 @@ interface UserService : BaseService {
         @Path("group_id") groupId: String
     ): Response<Boolean>
 
-    @GET("usersgroups/{user_id}/owner")
-    suspend fun numOfOwnGroups(
-        @Header("user") identity: String,
-        @Header("token") token: String,
-        @Path("user_id") userId: String
-    ): Response<Int>
-
     @POST("usersgroups")
     suspend fun addUserToGroup(
         @Header("user") identity: String,
