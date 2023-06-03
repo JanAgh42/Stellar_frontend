@@ -63,6 +63,19 @@
                             android:layout_marginBottom="15dp"
                             android:layout_marginRight="45dp"/>
                         <Button
+                            android:id="@+id/profile_save_photo"
+                            android:layout_width="120dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/logreg_bkg_design"
+                            android:backgroundTint="@color/group_green"
+                            app:backgroundTint="@null"
+                            android:text="Save Photo"
+                            android:textColor="@color/component_bkg"
+                            android:textStyle="bold"
+                            android:textAllCaps="false"
+                            android:layout_marginBottom="15dp"
+                            android:layout_marginRight="45dp"/>
+                        <Button
                             android:id="@+id/profile_log_out"
                             android:layout_width="120dp"
                             android:layout_height="40dp"
@@ -130,13 +143,29 @@
                 android:layout_marginBottom="70dp"
                 android:focusable="true"
                 android:focusableInTouchMode="true">
-                <ImageButton
-                    android:id="@+id/profile_edit_btn"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/edit_24"
+                    android:orientation="horizontal"
                     android:layout_gravity="right"
-                    android:layout_marginRight="-15dp"/>
+                    android:layout_marginRight="-15dp">
+                    <ImageButton
+                        android:id="@+id/profile_edit_save_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/location_24"
+                        android:layout_marginRight="8dp"/>
+                    <ImageButton
+                        android:id="@+id/profile_edit_btn"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/edit_24"/>
+                    <ImageButton
+                        android:id="@+id/profile_edit_undo_btn"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/delete_24"/>
+                </LinearLayout>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -165,10 +194,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/profile_info"
-                    android:hint="Philomenka"
-                    android:textColorHint="@color/white"
+                    android:text="Philomenka"
+                    android:textColor="@color/white"
                     android:textSize="17sp"
-                    android:paddingTop="2dp"/>
+                    android:paddingTop="2dp" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

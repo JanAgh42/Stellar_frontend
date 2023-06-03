@@ -72,7 +72,7 @@ class CollectionsFunctionality : ICollectionsFunctionality {
         }
     }
 
-    override fun generateDynamicColors(parent: LinearLayout, context: Context, callback: (text: String) -> Unit, colors: List<Int>) {
+    override fun generateDynamicColors(parent: LinearLayout, context: Context, callback: (text: String) -> Unit, colors: List<Int>, isGroup: Boolean) {
         val colorsNum = colors.size
 
         for ((currentColor, color) in colors.withIndex()) {
@@ -89,16 +89,6 @@ class CollectionsFunctionality : ICollectionsFunctionality {
             iconBorder.background = null
             iconShape.addView(iconBorder)
 
-            iconShape.setOnClickListener{ btn ->
-                callback((btn as FrameLayout).getChildAt(0).tag.toString())
-                this.changeSiblingBorder(parent)
-                iconBorder.background = ContextCompat.getDrawable(context, R.drawable.color_btn_border)
-            }
-            iconBorder.setOnClickListener{ btn ->
-                callback(btn.tag.toString())
-                this.changeSiblingBorder(parent)
-                iconBorder.background = ContextCompat.getDrawable(context, R.drawable.color_btn_border)
-            }
             parent.addView(iconShape)
 
             if (currentColor < colorsNum) {
@@ -107,6 +97,9 @@ class CollectionsFunctionality : ICollectionsFunctionality {
                 view.layoutParams = viewParams
                 parent.addView(view)
             }
+        }
+        if(isGroup) {
+            makeColorButtonsClickable(parent, context, callback)
         }
     }
 
@@ -131,6 +124,27 @@ class CollectionsFunctionality : ICollectionsFunctionality {
             }
             val layout = child as FrameLayout
             layout.getChildAt(0).background = null
+        }
+    }
+
+    override fun makeColorButtonsClickable(parent: LinearLayout, context: Context, callback: (text: String) -> Unit) {
+        for ((index, child) in parent.children.withIndex()) {
+            if (index % 2 != 0) {
+                continue
+            }
+            val iconShape = child as FrameLayout
+            val iconBorder = iconShape.getChildAt(0)
+
+            iconShape.setOnClickListener{ btn ->
+                callback((btn as FrameLayout).getChildAt(0).tag.toString())
+                this.changeSiblingBorder(parent)
+                iconBorder.background = ContextCompat.getDrawable(context, R.drawable.color_btn_border)
+            }
+            iconBorder.setOnClickListener{ btn ->
+                callback(btn.tag.toString())
+                this.changeSiblingBorder(parent)
+                iconBorder.background = ContextCompat.getDrawable(context, R.drawable.color_btn_border)
+            }
         }
     }
 }

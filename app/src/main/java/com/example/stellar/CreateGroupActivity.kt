@@ -94,8 +94,8 @@ class CreateGroupActivity(
 
         this.generateDynamicIcons(this.iconsLayout, this, this::getIconData)
         this.generateDynamicTags(this.tagsLayout, this, this::getTagData)
-        this.generateDynamicColors(this.groupBkg, this, this::getGroupColorData, Colors.groupColors)
-        this.generateDynamicColors(this.groupIconBkg, this, this::getIconColorData, Colors.groupColors)
+        this.generateDynamicColors(this.groupBkg, this, this::getGroupColorData, Colors.groupColors, true)
+        this.generateDynamicColors(this.groupIconBkg, this, this::getIconColorData, Colors.groupColors, true)
     }
 
     override fun setDefaultValues() {

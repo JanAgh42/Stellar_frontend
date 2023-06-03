@@ -79,7 +79,10 @@
                     android:textColorHint="@color/text_gray"
                     android:hint="@string/cpost_message_hint"
                     android:background="@color/component_bkg"/>
-
+                    <ImageView
+                        android:id="@+id/anyad"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
