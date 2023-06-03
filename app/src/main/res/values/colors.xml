@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background">#123345</color>
+    <color name="component_bkg">#1B3C4E</color>
+    <color name="details_blue">#5DA1C7</color>
+    <color name="menu_blue">#8FD1F7</color>
+    <color name="profile_info">#22485E</color>
+
+    <color name="group_pink">#FF6FB4</color>
+    <color name="group_green">#4CAE56</color>
+    <color name="group_turquoise">#2CB8B8</color>
+    <color name="group_orange">#E46D00</color>
+    <color name="group_purple">#9C45E1</color>
+    <color name="group_red">#FF5151</color>
+    <color name="group_blue">#5F51FF</color>
+    <color name="group_violet">#B323CA</color>
+
+    <color name="username_red">#FF0000</color>
+    <color name="username_yellow">#FAFF00</color>
+    <color name="username_green">#00FF47</color>
+    <color name="username_turquoise">#00F0FF</color>
+    <color name="username_blue">#0500FF</color>
+    <color name="username_purple">#B323CA</color>
+    <color name="username_pink">#FF73D8</color>
+
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+
+    <color name="hints_gray">#7A7A7A</color>
+    <color name="text_gray">#B3B3B3</color>
+</resources>

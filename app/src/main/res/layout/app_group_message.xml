@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/component_bkg"
+    android:paddingTop="10dp"
+    android:paddingHorizontal="15dp"
+    android:paddingBottom="15dp"
+    android:layout_marginTop="15dp"
+    android:orientation="horizontal">
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@color/white"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="15dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Replying to @Philomenka \n I'm coming home..."
+                    android:textColor="@color/text_gray"
+                    android:textSize="10sp"
+                    android:paddingBottom="5dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Philomenka"
+                    android:textSize="17sp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="18 May 2023 11:48"
+                    android:textSize="12sp"
+                    android:textColor="@color/text_gray"/>
+            </LinearLayout>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:background="@drawable/more_24"
+                android:layout_marginRight="-12dp"
+                android:layout_marginTop="-5dp"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nulla lectus, pellentesque ac lacinia ut, dapibus eu turpis. Pellentesque sit amet vehicula risus. Nam volutpat nulla sed erat posuere, vel mattis est lacinia. Integer laoreet laoreet eros nec pharetra. Praesent enim diam, suscipit ut ultrices mattis, vehicula non orci. Quisque pharetra eros ut libero fermentum condimentum. Mauris blandit dolor et nisl interdum, in porttitor urna vehicula. Morbi vel justo est. Aliquam bibendum feugiat odio sed pretium. Pellentesque eu justo bibendum, commodo metus a, accumsan felis. Ut volutpat ultricies hendrerit. Praesent lobortis eros ac fringilla volutpat. Cras finibus, mauris eget aliquet pharetra, felis massa condimentum dui, eget tempus odio tellus vel tortor. Vivamus quis sem quis mauris pulvinar pretium ac a erat."
+            android:paddingTop="10dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="10dp">
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/location_24"
+                android:layout_marginLeft="-3dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Moscow, Canada"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/text_gray"
+                android:paddingLeft="5dp"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
