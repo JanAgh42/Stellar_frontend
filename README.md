@@ -42,3 +42,21 @@ The application supports:
 
 - Kotlin
 - XML
+
+### Design overview
+
+Login Activity             |  Register Activity
+:-------------------------:|:-------------------------:
+![](pics/login_activity.jpg)  |  ![](pics/register_activity.jpg)
+
+Main Activity              |  Profile Activity
+:-------------------------:|:-------------------------:
+![](pics/home_page_activity.jpg)  |  ![](pics/profile_Activity.jpg)
+
+Create Group Activity      |  Create Post Activity
+:-------------------------:|:-------------------------:
+![](pics/create_group_activity.jpg)  |  ![](pics/create_post_activity.jpg)
+
+Search Activity            |  Notifications Activity
+:-------------------------:|:-------------------------:
+![](pics/search_activity.jpg)  |  ![](pics/notifications_activity.jpg)
